@@ -21,6 +21,7 @@ pi: float = umath.pi
 wheel_diameter: float = 68.8
 wheel_circumference: float = wheel_diameter * pi
 distance_between_wheels: int = 205
+cleanedList: list[Color] = []
 # INITIALIZATION            
 
 hub: PrimeHub = PrimeHub()
@@ -193,10 +194,10 @@ async def yellowTowers() -> None:
 
     # picking up the towers
     db.settings(200,600,120,300)
-    await db.straight(268)
+    await db.straight(260)
     await db.turn(-90)
     db.stop()
-    db.settings(260,400,150,300)
+    db.settings(210,400,150,300)
     await db.straight(200)
     db.settings(150,300,120,300)
     await db.straight(110)
@@ -228,10 +229,15 @@ async def yellowTowers() -> None:
     await multitask(async_wrapper(db.straight, 328), moveAttachmentArms(40, -250))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
-    await db.straight(215)
+    await db.straight(210)
     await moveAttachmentArms(38,255)
     await db.straight(-100)
     db.settings(280, 800, 160, 300)
+
+
+
+    gc.collect()
+
 
 async def colorScanning() -> list[Color]:
     """
@@ -268,12 +274,6 @@ async def colorScanning() -> list[Color]:
             break
 
         await wait(50)
-
+    print(cleanedList[3])
     return cleanedList
-
-
-    gc.collect()
-
-
-
     
