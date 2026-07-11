@@ -233,7 +233,7 @@ async def yellowTowers() -> None:
     await db.straight(-100)
     db.settings(280, 800, 160, 300)
 
-async def colorScanning() -> list[Color]:
+async def colorScanning():
     """
     Scans colors (of artifacts) until a list of 4, unique, valid (as defined by list validColors) is formed
 
