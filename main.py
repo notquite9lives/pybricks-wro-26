@@ -22,14 +22,15 @@ async def main():
 
     # color scanning the artifacts
     await db.turn(-90)
-    await db.straight(-77)
+    await db.straight(-85)
     await db.turn(-90)
     await db.straight(-80)
     await db.turn(-3)
     db.settings(250, 700, 150, 300)
     await db.straight(20)
     colors = await multitask(async_wrapper(db.straight, 670), colorScanning())
-    colors = colors[0]
+    print(colors)
+    colors = colors[1]
    
     # picking up artifacts
     await moveAttachmentArms(40,-270)
@@ -51,9 +52,10 @@ async def main():
         await db.turn(90)
         await db.straight(400)
         await db.turn(-90)
-        await db.straight(160)
-        await moveRightArm(40,-270)
-        await db.straight(-100)
+        await db.straight(150)
+        await moveLeftArm(40,-270)
+        await db.straight(-90)
+
 if __name__ == "__main__":
     run_task(main())
 

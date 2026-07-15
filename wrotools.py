@@ -97,10 +97,7 @@ async def moveRightArm(speed: float, angle: int) -> None:
     """
 
     speed = convertSpeed(speed)
-
-    async def move_right():
-        await attachment_right.run_angle(speed, -angle)
-    await move_right()
+    await attachment_right.run_angle(speed, -angle)
 
 async def moveLeftArm(speed: float, angle: int) -> None:
     """
@@ -113,10 +110,7 @@ async def moveLeftArm(speed: float, angle: int) -> None:
     """
 
     speed = convertSpeed(speed)
-
-    async def move_left():
-        await attachment_left.run_angle(speed, angle)
-    await move_left()
+    await attachment_left.run_angle(speed, angle)
 
 async def moveUntilColor(reflection: int, speed: int, distance: int = 0, use_distance: bool = False) -> None:
     """
@@ -193,7 +187,7 @@ async def yellowTowers() -> None:
 
     # picking up the towers
     db.settings(200,600,120,300)
-    await db.straight(268)
+    await db.straight(260)
     await db.turn(-90)
     db.stop()
     db.settings(260,400,150,300)
@@ -207,14 +201,14 @@ async def yellowTowers() -> None:
 
     # placing first tower
     db.settings(500,650,150,300)
-    await db.straight(-35)
+    await db.straight(-55)
     await db.turn(90)
     await db.straight(503)
     await moveUntilColor(20, 45, 100) #fill distance properly
     db.settings(240, 700, 120, 250)
-    await db.straight(430)
+    await db.straight(435)
     await moveAttachmentArms(40,255)
-    await db.straight(-200)
+    await db.straight(-210)
     db.settings(280, 800, 160, 300)
 
     # calibration
@@ -225,7 +219,7 @@ async def yellowTowers() -> None:
     # placing second tower
     db.settings(450,600,150,300)
     await moveUntilColor(20, 40, 100) # fill distance properly
-    await multitask(async_wrapper(db.straight, 328), moveAttachmentArms(40, -250))
+    await multitask(async_wrapper(db.straight, 318), moveAttachmentArms(40, -250))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
     await db.straight(215)
