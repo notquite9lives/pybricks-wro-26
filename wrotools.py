@@ -180,14 +180,14 @@ async def yellowTowers() -> None:
     - Moving and placing the tower tops on the bases
     """
 
-    db.settings(270, 800, 150, 300)
+    db.settings(340, 900, 150, 300)
 
     # calibration
-    await multitask(async_wrapper(db.straight, -500), moveAttachmentArms(40, 450))
+    await multitask(async_wrapper(db.straight, -500), moveAttachmentArms(60, 450))
 
     # picking up the towers
-    db.settings(200,600,120,300)
-    await db.straight(262)
+    db.settings(350,700,120,300)
+    await db.straight(260)
     await db.turn(-90)
     db.stop()
     db.settings(260,400,150,300)

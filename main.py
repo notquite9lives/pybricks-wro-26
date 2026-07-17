@@ -38,7 +38,7 @@ async def main():
     await db.straight(-250)
     await db.straight(320)
     await db.turn(90)
-    await db.straight(253)
+    await db.straight(250)
     await db.turn(90)
     await db.straight(193)
     await moveAttachmentArms(30, 250)
@@ -50,11 +50,12 @@ async def main():
     if colors[3] == Color.YELLOW:
         await db.turn(3)
         await db.turn(90)
+        await db.turn(3)
         await db.straight(400)
         await db.turn(-90)
         await db.straight(150)
         await moveLeftArm(40,-270)
-        await db.straight(-90)
+        await db.straight(90)
     
     if colors[3] == Color.BLUE:
         await db.turn(87)
@@ -62,7 +63,9 @@ async def main():
         await db.turn(90)
         await db.straight(150)
         await moveLeftArm(40,-270)
-        await db.straight(-90)
+        await db.straight(90)
+
 if __name__ == "__main__":
+    print(db.distance_control.pid(28000, 0, 7000, 5, 10))
     run_task(main())
  
