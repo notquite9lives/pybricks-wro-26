@@ -55,8 +55,14 @@ async def main():
         await db.straight(150)
         await moveLeftArm(40,-270)
         await db.straight(-90)
-
+    
+    if colors[3] == Color.BLUE:
+        await db.turn(87)
+        await db.straight(130)
+        await db.turn(90)
+        await db.straight(150)
+        await moveLeftArm(40,-270)
+        await db.straight(-90)
 if __name__ == "__main__":
     run_task(main())
-
  
