@@ -4,6 +4,8 @@ from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScann
 from pybricks.tools import run_task, multitask
 import gc
 
+color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
+
 
 async def main():
     """the main function :)"""
@@ -22,7 +24,7 @@ async def main():
 
     # color scanning the artifacts
     await db.turn(-90)
-    await db.straight(-85)
+    await db.straight(-95)
     await db.turn(-90)
     await db.straight(-80)
     await db.turn(-3)
@@ -53,19 +55,53 @@ async def main():
         await db.turn(3)
         await db.straight(400)
         await db.turn(-90)
-        await db.straight(150)
+        await db.straight(170)
         await moveLeftArm(40,-270)
-        await db.straight(90)
+        await db.straight(-90)
     
     if colors[3] == Color.BLUE:
-        await db.turn(87)
-        await db.straight(130)
+        await db.turn(3)
         await db.turn(90)
-        await db.straight(150)
+        await db.turn(3)
+        await db.straight(260)
+        await db.turn(-90)
+        await db.straight(170)
         await moveLeftArm(40,-270)
-        await db.straight(90)
+        await db.straight(-90)
+
+    if colors[3] == Color.BLACK:
+        await db.turn(3)
+        await db.turn(90)
+        await db.turn(3)
+        await db.straight(130)
+        await db.turn(-90)
+        await db.straight(170)
+        await moveLeftArm(40,-270)
+        await db.straight(-90)
+
+    if colors[3] == Color.GREEN:
+        await db.straight(170)
+        await moveLeftArm(40,-270)
+        await db.straight(-90)
+    
+    if colors[3] == Color.RED:
+        await db.turn(-87)
+        await db.straight(150)
+        await db.turn(90)
+        await db.straight(170)
+        await moveLeftArm(40,-270)
+        await db.straight(-90)
+
+    x = color_list.index(colors[3]) - color_list.index(colors[2])
+    await db.straight(-80)
+    await db.turn(-90)
+    await db.straight(x * 125)
+    await db.turn(90)
+    await db.straight(170)
+    await moveRightArm(40,-270)
+    await db.straight(-90)
 
 if __name__ == "__main__":
-    print(db.distance_control.pid(28000, 0, 7000, 5, 10))
+    print(db.distance_control.pid(27000, 0, 7000, 4, 9))
     run_task(main())
  
