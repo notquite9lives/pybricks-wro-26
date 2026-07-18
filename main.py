@@ -73,7 +73,7 @@ async def main():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(130)
+        await db.straight(850)
         await db.turn(-90)
         await db.straight(170)
         await moveLeftArm(40,-270)
@@ -94,7 +94,10 @@ async def main():
 
     x = color_list.index(colors[3]) - color_list.index(colors[2])
     await db.straight(-80)
-    await db.turn(-90)
+    if x > 0:
+        await db.turn(-90)
+    else :
+        await db.turn(90)
     await db.straight(x * 125)
     await db.turn(90)
     await db.straight(170)

@@ -187,7 +187,7 @@ async def yellowTowers() -> None:
 
     # picking up the towers
     db.settings(350,700,120,300)
-    await db.straight(259)
+    await db.straight(262)
     await db.turn(-90)
     db.stop()
     db.settings(260,400,150,300)
