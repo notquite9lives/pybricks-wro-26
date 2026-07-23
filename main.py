@@ -53,13 +53,13 @@ async def main():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(400)
+        await db.straight(360)
         await db.turn(-90)
         await db.straight(170)
         await moveLeftArm(40,-270)
-        await db.straight(-90)
+
     
-    if colors[3] == Color.BLUE:
+    elif colors[3] == Color.BLUE:
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
@@ -67,42 +67,55 @@ async def main():
         await db.turn(-90)
         await db.straight(170)
         await moveLeftArm(40,-270)
-        await db.straight(-90)
 
-    if colors[3] == Color.BLACK:
+
+    elif colors[3] == Color.BLACK:
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(850)
+        await db.straight(180)
         await db.turn(-90)
         await db.straight(170)
         await moveLeftArm(40,-270)
-        await db.straight(-90)
 
-    if colors[3] == Color.GREEN:
+
+    elif colors[3] == Color.GREEN:
         await db.straight(170)
         await moveLeftArm(40,-270)
-        await db.straight(-90)
+
     
-    if colors[3] == Color.RED:
+    elif colors[3] == Color.RED:
         await db.turn(-87)
         await db.straight(150)
         await db.turn(90)
         await db.straight(170)
         await moveLeftArm(40,-270)
-        await db.straight(-90)
 
-    x = color_list.index(colors[3]) - color_list.index(colors[2])
-    await db.straight(-80)
-    if x > 0:
-        await db.turn(-90)
-    else :
-        await db.turn(90)
-    await db.straight(x * 125)
-    await db.turn(90)
-    await db.straight(170)
-    await moveRightArm(40,-270)
-    await db.straight(-90)
+
+    if colors[3] == Color.YELLOW and colors[2] == Color.BLUE:
+        await moveRightArm(40,-270)
+
+    elif colors[3] == Color.BLUE and colors[2] == Color.BLACK:
+            await moveRightArm(40,-270)
+            if colors[3] == Color.BLACK and colors[2] == Color.GREEN:
+                await moveRightArm(40,-270)
+            else:
+                if colors[3] == Color.GREEN and colors[2] == Color.RED:
+                    await moveRightArm(40,-270)
+                else:
+                    await db.straight(-90)
+                    x = color_list.index(colors[3]) - color_list.index(colors[2])
+                    await db.straight(-80)
+                    if x > 0:
+                        await db.turn(90)
+                    else :
+                        await db.turn(-90)
+                    await db.straight(x * 145 - 14.4)
+                    await db.turn(90)
+                    await db.straight(170)
+                    await moveRightArm(40,-270)
+                    await db.straight(-90)
+
 
 if __name__ == "__main__":
     print(db.distance_control.pid(27000, 0, 7000, 4, 9))

@@ -187,13 +187,13 @@ async def yellowTowers() -> None:
 
     # picking up the towers
     db.settings(350,700,120,300)
-    await db.straight(262)
+    await db.straight(260)
     await db.turn(-90)
     db.stop()
     db.settings(260,400,150,300)
     await db.straight(200)
     db.settings(150,300,120,300)
-    await db.straight(120)
+    await db.straight(90)
     db.settings(250, 650, 150, 300)
     await moveAttachmentArms(40, -390)
 
@@ -201,7 +201,7 @@ async def yellowTowers() -> None:
 
     # placing first tower
     db.settings(500,650,150,300)
-    await db.straight(-55)
+    await db.straight(-25)
     await db.turn(90)
     await db.straight(503)
     await moveUntilColor(20, 45, 100) #fill distance properly
