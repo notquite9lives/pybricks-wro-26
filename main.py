@@ -41,7 +41,7 @@ async def main():
     await db.turn(90)
     await db.straight(250)
     await db.turn(90)
-    await db.straight(193)
+    await db.straight(168)
     await moveAttachmentArms(30, 250)
     await db.turn(180)
     await db.straight(600)
@@ -52,7 +52,7 @@ async def main():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(350)
+        await db.straight(410)
         await db.turn(-90)
         await db.straight(170)
         await moveLeftArm(40,-270)
@@ -72,21 +72,21 @@ async def main():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(180)
+        await db.straight(140)
         await db.turn(-90)
         await db.straight(170)
         await moveLeftArm(40,-270)
 
 
     elif colors[3] == Color.GREEN:
-        await db.turn(6)
+        await db.turn(-1)
         await db.straight(150)
         await moveLeftArm(40,-270)
 
     
     elif colors[3] == Color.RED:
         await db.turn(-87)
-        await db.straight(150)
+        await db.straight(170)
         await db.turn(90)
         await db.straight(170)
         await moveLeftArm(40,-270)
@@ -98,21 +98,21 @@ async def main():
     elif colors[3] == Color.BLUE and colors[2] == Color.BLACK:
         await moveRightArm(40,-270)
 
-    elif colors[3] == Color.BLACK and colors[2] == Color.GREEN:
+    elif colors[3] == Color.BLACK and colors[2] == Color.GREEN:   
         await moveRightArm(40,-270)
 
     elif colors[3] == Color.GREEN and colors[2] == Color.RED:
         await moveRightArm(40,-270)
 
     else:
-        await db.straight(-90)
+        await db.straight(90)
         x = color_list.index(colors[3]) - color_list.index(colors[2])
         await db.straight(-80)
         if x > 0:
             await db.turn(90)
         else:
             await db.turn(-90)
-        await db.straight(x * 130 - 144)
+        await db.straight(abs(x * 125 - 154))
         await db.turn(90)
         await db.straight(170)
         await moveRightArm(40,-270)
