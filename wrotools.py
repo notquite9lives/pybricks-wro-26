@@ -189,10 +189,9 @@ async def yellowTowers() -> None:
     db.settings(350,700,120,300)
     await db.straight(262)
     await db.turn(-90)
-    await db.turn(0)
     db.stop()
     db.settings(260,400,150,300)
-    await db.straight(200)
+    await db.straight(202)
     db.settings(150,300,120,300)
     await db.straight(120)
     db.settings(250, 650, 150, 300)
@@ -202,7 +201,7 @@ async def yellowTowers() -> None:
 
     # placing first tower
     db.settings(500,650,150,300)
-    await db.straight(-55)
+    await db.straight(-6)
     await db.turn(90)
     await db.straight(503)
     await moveUntilColor(20, 45, 100) #fill distance properly
@@ -244,7 +243,7 @@ async def colorScanning():
         currentScan = await color_sensor2.color()
         currentHSV = await color_sensor2.hsv()
         finalDebounce = 3
-        if 3 <= currentReflection <= 10:
+        if 3 <= currentReflection <= 9:
             black_debounce_count += 1
             if black_debounce_count >= finalDebounce:
                 if Color.BLACK not in cleanedList:
@@ -256,7 +255,7 @@ async def colorScanning():
                 cleanedList.append(currentScan)
                 print(currentScan, currentReflection, currentHSV)
         else:
-            black_debounce_count = 0
+            black_debounce_count = 0 
 
         if len(cleanedList) == 4:
             print(cleanedList)
