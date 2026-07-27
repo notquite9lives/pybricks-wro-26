@@ -97,7 +97,17 @@ async def main():
             await moveRightArm(40,-270)
 
         elif colors[2] == Color.YELLOW:
-            pass
+            await db.straight(-140)
+            await db.turn(90)
+            await db.straight(92)
+            await moveRightArm(40,-270)
+            await db.straight(-100)
+            await db.turn(90)
+            await db.straight(100)
+            await db.turn(-90)
+            await db.straight(250)
+            await db.turn(90)
+            await db.straight(-280)
 
 
     elif colors[3] == Color.BLACK:
