@@ -107,7 +107,7 @@ async def main():
             await db.turn(-90)
             await db.straight(250)
             await db.turn(90)
-            await db.straight(-280)
+            await db.straight(-265)
 
 
     elif colors[3] == Color.BLACK:
