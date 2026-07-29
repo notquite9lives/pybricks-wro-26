@@ -1,7 +1,7 @@
 from pybricks.parameters import Color
 
 from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScanning, moveAttachmentArms, hub, \
-    moveLeftArm, moveRightArm, moveUntilReflection
+    moveLeftArm, moveRightArm, moveUntilColor
 from pybricks.tools import run_task, multitask
 import gc
 color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
@@ -38,8 +38,8 @@ async def main():
     await moveAttachmentArms(40,-270)
     await db.turn(90)
     await db.straight(-250)"""
-    db.settings(280, 800, 160, 300)
-    colors = [Color.GREEN, Color.RED, Color.BLACK, Color.BLUE]
+    db.settings(260, 600, 160, 300)
+    colors = [Color.GREEN, Color.RED, Color.GREEN, Color.BLUE]
     await db.straight(320)
     await db.turn(90)
     await db.straight(255)
@@ -47,9 +47,10 @@ async def main():
     await db.straight(190)
     await moveAttachmentArms(30, 250)
     await db.turn(180)
-    await moveUntilColor()
-
-    raise(Exception("Stop code to observe distance from red line"))
+    await db.straight(200)
+    await moveUntilColor(Color.RED, 40)
+    await db.straight(-55)
+    #await db.straight(600)
 
     #color thingy
     if colors[3] == Color.YELLOW:

@@ -156,6 +156,49 @@ async def moveUntilReflection(reflection: int, speed: int, distance: int = 0, us
     db.brake()
 
 
+async def moveUntilColor(color: Color, speed: int, distance: int = 0, use_distance: bool = False) -> None:
+    """
+    Makes the robot move until either:
+    - A. It reaches a color with a reflection below a certain threshold
+    - B. A certain distance is reached
+
+    :param reflection: The reflection threshold where the robot will stop moving
+    :type reflection: int, %
+    :param speed: The percentage speed that the bot will move at
+    :type speed: int, %
+    :param distance: The secondary distance threshold where the robot will stop
+    :type distance: int, mm
+    :param use_distance: Controls whether to use the distance check
+    :type use_distance: bool
+    """
+
+    async def waitForColor():
+        while await color_sensor1.color() != color:
+            await wait(10)
+
+    async def driveForever():
+        db.drive(0.6004 * convertSpeed(speed), 0)
+
+        while True:
+            await wait(10)
+
+    async def detectDistance():
+        while True:
+            distance_moved = 0.6004 * right_motor.angle()
+            if distance_moved >= distance:
+                break
+            await wait(10)
+
+    await resetDB()
+
+    if use_distance:
+        await multitask(driveForever(), waitForColor(), detectDistance(), race=True)
+    else:
+        await multitask(driveForever(), waitForColor(), race=True)
+
+    db.brake()
+
+
 async def async_wrapper(func, *args, **kwargs):
     """
     Forces a pybricks MaybeAwaitable function to always behave like a coroutine so that it functions with the multitask() function
