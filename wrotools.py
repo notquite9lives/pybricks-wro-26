@@ -20,7 +20,7 @@ pi: float = umath.pi
 
 wheel_diameter: float = 68.8
 wheel_circumference: float = wheel_diameter * pi
-distance_between_wheels: int = 205
+distance_between_wheels: int = 198
 # INITIALIZATION            
 
 hub: PrimeHub = PrimeHub()
@@ -112,7 +112,7 @@ async def moveLeftArm(speed: float, angle: int) -> None:
     speed = convertSpeed(speed)
     await attachment_left.run_angle(speed, angle)
 
-async def moveUntilColor(reflection: int, speed: int, distance: int = 0, use_distance: bool = False) -> None:
+async def moveUntilReflection(reflection: int, speed: int, distance: int = 0, use_distance: bool = False) -> None:
     """
     Makes the robot move until either:
     - A. It reaches a color with a reflection below a certain threshold
@@ -204,7 +204,7 @@ async def yellowTowers() -> None:
     await db.straight(-55)
     await db.turn(90)
     await db.straight(503)
-    await moveUntilColor(20, 45, 100) #fill distance properly
+    await moveUntilReflection(20, 45, 100) #fill distance properly
     db.settings(240, 700, 120, 250)
     await db.straight(435)
     await moveAttachmentArms(40,260)
@@ -218,7 +218,7 @@ async def yellowTowers() -> None:
 
     # placing second tower
     db.settings(450,600,150,300)
-    await moveUntilColor(20, 40, 100) # fill distance properly
+    await moveUntilReflection(20, 40, 100) # fill distance properly
     await multitask(async_wrapper(db.straight, 330), moveAttachmentArms(40, -260))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)

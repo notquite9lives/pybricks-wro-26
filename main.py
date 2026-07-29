@@ -1,6 +1,7 @@
 from pybricks.parameters import Color
 
-from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScanning, moveAttachmentArms, hub, moveLeftArm, moveRightArm
+from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScanning, moveAttachmentArms, hub, \
+    moveLeftArm, moveRightArm, moveUntilReflection
 from pybricks.tools import run_task, multitask
 import gc
 color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
@@ -37,7 +38,8 @@ async def main():
     await moveAttachmentArms(40,-270)
     await db.turn(90)
     await db.straight(-250)"""
-    colors = [Color.GREEN, Color.RED, Color.YELLOW, Color.BLUE]
+    db.settings(280, 800, 160, 300)
+    colors = [Color.GREEN, Color.RED, Color.BLACK, Color.BLUE]
     await db.straight(320)
     await db.turn(90)
     await db.straight(255)
@@ -45,9 +47,10 @@ async def main():
     await db.straight(190)
     await moveAttachmentArms(30, 250)
     await db.turn(180)
-    await db.straight(600)
+    await moveUntilColor()
 
-    print()
+    raise(Exception("Stop code to observe distance from red line"))
+
     #color thingy
     if colors[3] == Color.YELLOW:
         await db.turn(3)
@@ -72,9 +75,9 @@ async def main():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(227)
+        await db.straight(235)
         await db.turn(-90)
-        await db.straight(167)
+        await db.straight(172)
         await moveLeftArm(40,-270)
 
         if colors[2] == Color.BLACK:
@@ -83,7 +86,7 @@ async def main():
         elif colors[2] == Color.RED:
             await db.straight(-140)
             await db.turn(-90)
-            await db.straight(275)
+            await db.straight(267)
             await db.turn(90)
             await db.straight(140)
             await moveRightArm(40,-270)
@@ -107,6 +110,7 @@ async def main():
             await db.turn(-90)
             await db.straight(250)
             await db.turn(90)
+            db.settings(200, 500, 120, 200)
             await db.straight(-265)
 
 
