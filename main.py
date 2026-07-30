@@ -39,27 +39,27 @@ async def main():
     await db.turn(90)
     await db.straight(-250)"""
     db.settings(260, 600, 160, 300)
-    colors = [Color.GREEN, Color.RED, Color.GREEN, Color.BLUE]
+    colors = [Color.GREEN, Color.RED, Color.GREEN, Color.YELLOW]
     await db.straight(320)
     await db.turn(90)
-    await db.straight(255)
+    await db.straight(250)
     await db.turn(90)
     await db.straight(190)
     await moveAttachmentArms(30, 250)
     await db.turn(180)
-    await db.straight(200)
+    """await db.straight(200)
     await moveUntilColor(Color.RED, 40)
-    await db.straight(-55)
-    #await db.straight(600)
+    await db.straight(-55)"""
+    await db.straight(600)
 
     #color thingy
     if colors[3] == Color.YELLOW:
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(410)
+        await db.straight(361)
         await db.turn(-90)
-        await db.straight(170)
+        await db.straight(176)
         await moveLeftArm(40,-270)
         if colors[2] == Color.BLUE:
             await moveRightArm(40,-270)
@@ -68,7 +68,15 @@ async def main():
         elif colors[2] == Color.RED:
             pass
         elif colors[2] == Color.GREEN:
-            pass
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(-90)
+            await db.straight(275)
+            await db.turn(90)
+            await db.straight(140)
+            await moveRightArm(40,-270)
+            
+            
 
     
     elif colors[3] == Color.BLUE:
