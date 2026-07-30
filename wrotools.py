@@ -312,5 +312,14 @@ async def colorScanning():
     gc.collect()
 
 
+async def correction(angle):
+    db.settings(200, 700, 100, 200)
+    for i in range(3):
+        error = (hub.imu.heading() + 180) % 360 - 180
+        await db.turn(angle-error)
+    db.settings(260, 600, 160, 300)
+
+
+
 
     
