@@ -312,11 +312,19 @@ async def colorScanning():
     gc.collect()
 
 
-async def correction(angle):
+async def correction(target_heading):
     db.settings(200, 700, 100, 200)
-    for i in range(3):
-        error = (hub.imu.heading() + 180) % 360 - 180
-        await db.turn(angle-error)
+
+    # 1. Calculate raw difference
+    error = hub.imu.heading() - target_heading
+
+    # 2. Wrap error into range [-180, 180] for the shortest path
+    shortest_error = (error + 180) % 360 - 180
+
+    # 3. Turn to eliminate the error
+    if not (-0.5 < shortest_error < 0.5):
+        await db.turn(-shortest_error)
+
     db.settings(260, 600, 160, 300)
 
 

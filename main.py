@@ -4,7 +4,7 @@ from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScann
     moveLeftArm, moveRightArm, moveUntilColor, correction
 from pybricks.tools import run_task, multitask
 import gc
-color_list = [Color.RED, Color.GREEN, Color.BLUE, Color.GREEN]
+color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.GREEN]
 
 
 async def main():
@@ -14,7 +14,7 @@ async def main():
     gc.collect()
     db.settings(240, 650, 120, 250)
     #db.settings(500, 1000, 500, 600)
-    watch.reset()
+    watch.reset()ACK
     watch.resume()
     await resetDB()
 //
@@ -39,7 +39,7 @@ async def main():
     await db.turn(90)
     await db.straight(-250)"""
     db.settings(260, 600, 160, 300)
-    colors = [Color.GREEN, Color.RED, Color.BLACK, Color.GREEN]
+    colors = [Color.GREEN, Color.RED, Color.BLUE, Color.GREEN]
     await db.straight(320)
     await db.turn(90)
     await db.straight(253)
@@ -53,7 +53,7 @@ async def main():
     if colors[3] == Color.GREEN:
         await db.straight(300)
         await db.turn(-90)
-        await db.straight(40)
+        await db.straight(37)
         await db.turn(90)
         await db.straight(320)
         await correction(0)
@@ -180,9 +180,9 @@ async def main():
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(370)
+            await db.straight(372)
             await db.turn(-90)
-            await db.straight(140)
+            await db.straight(145)
             await moveRightArm(40, -270)
         elif colors[2] == Color.YELLOW:
             pass
