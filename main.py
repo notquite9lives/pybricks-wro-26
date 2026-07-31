@@ -4,7 +4,7 @@ from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScann
     moveLeftArm, moveRightArm, moveUntilColor, correction
 from pybricks.tools import run_task, multitask
 import gc
-color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
+color_list = [Color.RED, Color.GREEN, Color.BLUE, Color.GREEN]
 
 
 async def main():
@@ -17,7 +17,7 @@ async def main():
     watch.reset()
     watch.resume()
     await resetDB()
-
+//
     # yellow towers + time
     await yellowTowers()
     print(watch.time()/1000)
@@ -180,7 +180,7 @@ async def main():
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(250)
+            await db.straight(370)
             await db.turn(-90)
             await db.straight(140)
             await moveRightArm(40, -270)
