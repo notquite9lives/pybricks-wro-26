@@ -8,16 +8,15 @@ color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.GREEN]
 
 
 async def main():
-    """
+
     print(round((hub.battery.voltage()-6500)/19))
     # initialization and running garbage collector
     gc.collect()
     db.settings(240, 650, 120, 250)
     #db.settings(500, 1000, 500, 600)
-    watch.reset()ACK
+    watch.reset()
     watch.resume()
     await resetDB()
-//
     # yellow towers + time
     await yellowTowers()
     print(watch.time()/1000)
@@ -37,9 +36,8 @@ async def main():
     # picking up artifacts
     await moveAttachmentArms(40,-270)
     await db.turn(90)
-    await db.straight(-250)"""
+    await db.straight(-250)
     db.settings(260, 600, 160, 300)
-    colors = [Color.GREEN, Color.RED, Color.BLUE, Color.GREEN]
     await db.straight(320)
     await db.turn(90)
     await db.straight(253)
@@ -50,19 +48,19 @@ async def main():
     """await db.straight(200)
     await moveUntilColor(Color.RED, 40)
     await db.straight(-55)"""
+
     if colors[3] == Color.GREEN:
         await db.straight(300)
         await db.turn(-90)
         await db.straight(37)
         await db.turn(90)
         await db.straight(320)
-        await correction(0)
     else:
         await db.straight(600)
-        await correction(0)
 
     #color thingy
     if colors[3] == Color.YELLOW:
+
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
@@ -70,8 +68,10 @@ async def main():
         await db.turn(-90)
         await db.straight(176)
         await moveLeftArm(40,-270)
+
         if colors[2] == Color.BLUE:
             await moveRightArm(40,-270)
+
         elif colors[2] == Color.BLACK:
             await db.turn(-1)
             await db.straight(-140)
@@ -80,6 +80,7 @@ async def main():
             await db.turn(90)
             await db.straight(140)
             await moveRightArm(40, -270)
+
         elif colors[2] == Color.RED:
             await db.turn(-1)
             await db.straight(-140)
@@ -88,6 +89,7 @@ async def main():
             await db.turn(90)
             await db.straight(140)
             await moveRightArm(40, -270)
+
         elif colors[2] == Color.GREEN:
             await db.turn(-1)
             await db.straight(-140)
@@ -142,32 +144,60 @@ async def main():
             await db.turn(90)
             db.settings(200, 500, 120, 200)
             await db.straight(-265)
+            db.settings(260, 700, 150, 300)
 
 
     elif colors[3] == Color.BLACK:
+
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(140)
+        await db.straight(100)
         await db.turn(-90)
-        await db.straight(170)
+        await db.straight(172)
         await moveLeftArm(40,-270)
+
         if colors[2] == Color.GREEN:
             await moveRightArm(40, -270)
+
         elif colors[2] == Color.RED:
-            pass
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(-90)
+            await db.straight(135)
+            await db.turn(90)
+            await db.straight(140)
+            await moveRightArm(40,-270)
+
         elif colors[2] == Color.BLUE:
-            pass
-        elif colors[2] == Color.BLACK:
-            pass
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(90)
+            await db.straight(250)
+            await db.turn(-90)
+            await db.straight(147)
+            await moveRightArm(40, -270)
+
+        elif colors[2] == Color.YELLOW:
+            await db.turn(-2)
+            await db.straight(-350)
+            await db.turn(90)
+            await db.straight(382)
+            await db.turn(-90)
+            await db.straight(350)
+            await db.turn(1)
+            await moveRightArm(40, -270)
 
 
     elif colors[3] == Color.GREEN:
+
         await db.turn(6)
         await db.straight(150)
         await moveLeftArm(40,-270)
+
         if colors[2] == Color.RED:
             await moveRightArm(40, -270)
+
         elif colors[2] == Color.BLACK:
             await db.turn(-1)
             await db.straight(-140)
@@ -176,6 +206,7 @@ async def main():
             await db.turn(-90)
             await db.straight(140)
             await moveRightArm(40, -270)
+
         elif colors[2] == Color.BLUE:
             await db.turn(-1)
             await db.straight(-140)
@@ -184,26 +215,64 @@ async def main():
             await db.turn(-90)
             await db.straight(145)
             await moveRightArm(40, -270)
+
         elif colors[2] == Color.YELLOW:
-            pass
+            await db.turn(-2)
+            await db.straight(-350)
+            await db.turn(90)
+            await db.straight(507)
+            await db.turn(-90)
+            await db.straight(350)
+            await db.turn(1)
+            await moveRightArm(40, -270)
 
     
     elif colors[3] == Color.RED:
+
         await db.turn(-87)
-        await db.straight(130)
+        await db.straight(150)
         await db.turn(90)
         await db.straight(170)
         await moveLeftArm(40,-270)
-        if colors[2] == Color.GREEN:
-            pass
-        elif colors[2] == Color.BLACK:
-            pass
-        elif colors[2] == Color.BLUE:
-            pass
-        elif colors[2] == Color.YELLOW:
-            pass
 
-    await db.turn(-1)
+        if colors[2] == Color.GREEN:
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(90)
+            await db.straight(245)
+            await db.turn(-90)
+            await db.straight(140)
+            await moveRightArm(40, -270)
+
+        elif colors[2] == Color.BLACK:
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(90)
+            await db.straight(372)
+            await db.turn(-90)
+            await db.straight(130)
+            await moveRightArm(40, -270)
+
+        elif colors[2] == Color.BLUE:
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(90)
+            await db.straight(502)
+            await db.turn(-90)
+            await db.straight(125)
+            await db.turn(1)
+            await moveRightArm(40, -270)
+
+        elif colors[2] == Color.YELLOW:
+            await db.turn(-1)
+            await db.straight(-350)
+            await db.turn(90)
+            await db.straight(632)
+            await db.turn(-90)
+            await db.straight(330)
+            await db.turn(1)
+            await moveRightArm(40, -270)
+
     await db.straight(-140)
 
     """else:

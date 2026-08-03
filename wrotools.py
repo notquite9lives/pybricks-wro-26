@@ -250,7 +250,7 @@ async def yellowTowers() -> None:
     await moveUntilReflection(20, 45, 100) #fill distance properly
     db.settings(240, 700, 120, 250)
     await db.straight(435)
-    await moveAttachmentArms(40,260)
+    await moveAttachmentArms(40,270)
     await db.straight(-210)
     db.settings(280, 800, 160, 300)
 
@@ -262,11 +262,11 @@ async def yellowTowers() -> None:
     # placing second tower
     db.settings(450,600,150,300)
     await moveUntilReflection(20, 40, 100) # fill distance properly
-    await multitask(async_wrapper(db.straight, 330), moveAttachmentArms(40, -260))
+    await multitask(async_wrapper(db.straight, 330), moveAttachmentArms(40, -270))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
     await db.straight(215)
-    await moveAttachmentArms(38,260)
+    await moveAttachmentArms(38,270)
     await db.straight(-100)
     db.settings(280, 800, 160, 300)
 
