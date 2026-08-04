@@ -328,6 +328,34 @@ async def correction(target_heading):
     db.settings(260, 600, 160, 300)
 
 
+async def scanHSV():
+    raw = await color_sensor1.hsv()
+    return raw.h, raw.s, raw.v
+
+async def moveUntilHSV(hue: int, saturation: int, value: int = 0, speed: int = 30):
+    async def waitUntilHSV():
+        while await scanHSV() != (hue, saturation, value):
+            await wait(0.05)
+
+    async def waitUntilHSV_noValue():
+        h, s, _ = await scanHSV()
+        while (h, s) != (hue, saturation):
+            await wait(0.05)
+            h, s, _ = await scanHSV()
+
+    async def driveForever():
+        db.drive(0.6004 * convertSpeed(speed), 0)
+
+        while True:
+            await wait(0.05)
+
+    if value == 0:
+        await multitask(waitUntilHSV_noValue(), driveForever(), race=True)
+    else:
+        await multitask(waitUntilHSV(), driveForever(), race=True)
+
+
+
 
 
     
