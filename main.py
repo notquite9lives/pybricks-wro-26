@@ -89,7 +89,7 @@ async def main():
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(-90)
-            await db.straight(495)
+            await db.straight(395)
             await db.turn(90)
             await db.straight(140)
             await moveRightArm(40, -270)
