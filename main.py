@@ -168,7 +168,7 @@ async def main():
             await db.turn(90)
             await db.straight(140)
             await moveRightArm(40,-270)
-
+#hi
         elif colors[2] == Color.BLUE:
             await db.turn(-1)
             await db.straight(-140)
