@@ -4,7 +4,7 @@ from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScann
     moveLeftArm, moveRightArm, moveUntilColor, correction
 from pybricks.tools import run_task, multitask, wait
 import gc
-colors = [Color.BLUE, Color.YELLOW, Color.BLACK, Color.RED]
+colors = [Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED]
 
 async def main():
 
@@ -310,7 +310,7 @@ async def main():
 
     await db.straight(300)
     await db.turn(90)
-    await db.straight(368)
+    await db.straight(353)
     await db.turn(93)
     await db.straight(240)
     await moveAttachmentArms(40, 280)
@@ -322,26 +322,25 @@ async def main():
         await db.straight(61)
         await db.turn(-90)
         await moveLeftArm(40,-270)
-        
+
         if colors[0] == Color.BLUE:
            print(colors[0])
-           moveRightArm(40, -270)
+           await moveRightArm(40, -270)
 
         await db.straight(-150)
         await db.turn(180)
         await db.straight(-350)
         await db.straight(150)
-        await db.turn(180)
+        await db.turn(90)
 
         if colors[0] == Color.GREEN:
             await db.turn(-1)
-            await db.straight(-140)
-            await db.turn(-90)
-            await db.straight(260)
+            await db.straight(320)
+            await db.turn(90)
             await moveRightArm(40,-270)
-            await db.straight(-150)
+            await db.straight(-100)
             await db.turn(180)
-            await db.straight(-340)
+            await db.straight(-470)
             await db.straight(150)
             await db.turn(180)
 
@@ -349,22 +348,13 @@ async def main():
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(-90)
-            await db.straight(390)
+            await db.straight(520)
             await moveRightArm(40,-270)
             await db.straight(-150)
             await db.turn(180)
             await db.straight(-340)
             await db.straight(150)
             await db.turn(180)
-
-
-        
-
-        
-
-
-
-
 
     color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
 """
