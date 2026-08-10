@@ -2,9 +2,9 @@ from pybricks.parameters import Color
 
 from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScanning, moveAttachmentArms, hub, \
     moveLeftArm, moveRightArm, moveUntilColor, correction
-from pybricks.tools import run_task, multitask
+from pybricks.tools import run_task, multitask, wait
 import gc
-colors = [Color.RED, Color.GREEN, Color.YELLOW, Color.GREEN]
+colors = [Color.BLUE, Color.YELLOW, Color.BLACK, Color.RED]
 
 async def main():
 
@@ -279,7 +279,7 @@ async def main():
     
     if colors[2] == Color.YELLOW:
         await db.turn(-90)
-        await db.straight(537)
+        await db.straight(535)
         await db.turn(90)
         await db.straight(-900)
 
@@ -291,7 +291,7 @@ async def main():
 
     elif colors[2] == Color.BLACK:
         await db.turn(-90)
-        await db.straight(260)
+        await db.straight(328)
         await db.turn(90)
         await db.straight(-900)
 
@@ -304,14 +304,67 @@ async def main():
     else:
         await db.straight(-900)
 
+    db.stop()
+    db.reset()
+    wait(100)
+
     await db.straight(300)
     await db.turn(90)
-    await db.straight(344)
+    await db.straight(368)
     await db.turn(93)
-    await db.straight(161)
-    await moveAttachmentArms(40, -270)
+    await db.straight(240)
+    await moveAttachmentArms(40, 280)
+    await db.turn(180)
+    await db.straight(600)
 
-    
+    if colors[1] == Color.YELLOW:
+        await db.turn(90)
+        await db.straight(61)
+        await db.turn(-90)
+        await moveLeftArm(40,-270)
+        
+        if colors[0] == Color.BLUE:
+           print(colors[0])
+           moveRightArm(40, -270)
+
+        await db.straight(-150)
+        await db.turn(180)
+        await db.straight(-350)
+        await db.straight(150)
+        await db.turn(180)
+
+        if colors[0] == Color.GREEN:
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(-90)
+            await db.straight(260)
+            await moveRightArm(40,-270)
+            await db.straight(-150)
+            await db.turn(180)
+            await db.straight(-340)
+            await db.straight(150)
+            await db.turn(180)
+
+        if colors[0] == Color.BLACK:
+            await db.turn(-1)
+            await db.straight(-140)
+            await db.turn(-90)
+            await db.straight(390)
+            await moveRightArm(40,-270)
+            await db.straight(-150)
+            await db.turn(180)
+            await db.straight(-340)
+            await db.straight(150)
+            await db.turn(180)
+
+
+        
+
+        
+
+
+
+
 
     color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
 """
