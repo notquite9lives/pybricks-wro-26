@@ -475,7 +475,7 @@ async def main():
 
     if colors[1] == Color.BLACK:
         await db.turn(-90)
-        await db.straight(210)
+        await db.straight(213)
         await db.turn(90)
         await moveLeftArm(40,-270)
 
@@ -486,7 +486,7 @@ async def main():
         await db.turn(-1)
         await db.straight(-100)
         await db.turn(180)
-        await db.straight(-318)
+        await db.straight(-313)
         db.turn(1)
         await db.straight(350 if colors[0] == Color.YELLOW else 150)
 
