@@ -146,7 +146,6 @@ async def main():
             await db.straight(-265)
             db.settings(260, 700, 150, 300)
 
-
     elif colors[3] == Color.BLACK:
 
         await db.turn(3)
