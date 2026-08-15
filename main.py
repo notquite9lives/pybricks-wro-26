@@ -4,7 +4,7 @@ from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScann
     moveLeftArm, moveRightArm, moveUntilColor, correction
 from pybricks.tools import run_task, multitask, wait
 import gc
-colors = [Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED]
+colors = [Color.YELLOW, Color.GREEN, Color.BLACK, Color.RED]
 
 async def main():
 
@@ -39,7 +39,7 @@ async def main():
         # picking up artifacts
     await moveAttachmentArms(40,-270)
     await db.turn(90)
-    await db.straight(-250)"""
+    await db.straight(-250)""""""""
     db.settings(260, 600, 160, 300)
     await db.straight(320)
     await db.turn(90)
@@ -98,10 +98,7 @@ async def main():
             await db.turn(90)
             await db.straight(140)
             await moveRightArm(40,-270)
-            
-            
 
-    
     elif colors[3] == Color.BLUE:
 
         await db.turn(3)
@@ -167,7 +164,7 @@ async def main():
             await db.turn(90)
             await db.straight(140)
             await moveRightArm(40,-270)
-#hi
+
         elif colors[2] == Color.BLUE:
             await db.turn(-1)
             await db.straight(-140)
@@ -186,7 +183,6 @@ async def main():
             await db.straight(350)
             await db.turn(1)
             await moveRightArm(40, -270)
-
 
     elif colors[3] == Color.GREEN:
 
@@ -224,7 +220,6 @@ async def main():
             await db.straight(350)
             await db.turn(1)
             await moveRightArm(40, -270)
-
     
     elif colors[3] == Color.RED:
 
@@ -302,23 +297,24 @@ async def main():
 
     else:
         await db.straight(-900)
-
+"""
     db.stop()
     db.reset()
     wait(100)
 
     await db.straight(300)
     await db.turn(90)
-    await db.straight(353)
+    await db.straight(358)
     await db.turn(93)
     await db.straight(240)
-    await moveAttachmentArms(40, 280)
+    await moveAttachmentArms(40, 270)
+    await db.straight(-100)
     await db.turn(180)
-    await db.straight(600)
+    await db.straight(500)
 
     if colors[1] == Color.YELLOW:
         await db.turn(90)
-        await db.straight(61)
+        await db.straight(51)
         await db.turn(-90)
         await moveLeftArm(40,-270)
 
@@ -326,35 +322,119 @@ async def main():
            print(colors[0])
            await moveRightArm(40, -270)
 
-        await db.straight(-150)
+        await db.straight(-100)
         await db.turn(180)
-        await db.straight(-350)
+        await db.straight(-320)
         await db.straight(150)
         await db.turn(90)
+        resetDB()
 
         if colors[0] == Color.GREEN:
-            await db.turn(-1)
-            await db.straight(320)
+            await db.straight(250)
             await db.turn(90)
             await moveRightArm(40,-270)
             await db.straight(-100)
             await db.turn(180)
-            await db.straight(-470)
+            await db.straight(-255)
             await db.straight(150)
             await db.turn(180)
 
         if colors[0] == Color.BLACK:
-            await db.turn(-1)
-            await db.straight(-140)
-            await db.turn(-90)
-            await db.straight(520)
+            await db.straight(145)
+            await db.turn(90)
             await moveRightArm(40,-270)
-            await db.straight(-150)
+            await db.straight(-100)
             await db.turn(180)
-            await db.straight(-340)
+            await db.turn(3)
+            await db.straight(-255)
             await db.straight(150)
             await db.turn(180)
 
+        if colors[0] == Color.RED:
+            await db.straight(405)
+            await db.turn(90)
+            await moveRightArm(40,-270)
+            await db.straight(-100)
+            await db.turn(180)
+            await db.turn(3)
+            await db.straight(-255)
+            await db.straight(150)
+            await db.turn(180)
+
+    if colors[1] == Color.RED:
+
+
+        # 26, 36, 48.5 62.5
+        await db.turn(-90)
+        await db.straight(488)
+        await db.turn(90)
+        await moveLeftArm(40,-270)
+        await db.straight(-100)
+        await db.turn(180)
+        await db.straight(-310)
+        if colors[0] == Color.YELLOW:
+            await db.straight(350)
+        else:
+            await db.straight(150)
+        await db.turn(-90)
+        resetDB()        
+
+        if colors[0] == Color.GREEN:
+            await db.straight(250)
+            await db.turn(-90)
+            await moveRightArm(40,-270)
+            await db.straight(-100)
+            await db.turn(180)
+            await db.straight(-248)
+            await db.straight(150)
+            await db.turn(180)
+
+        if colors[0] == Color.BLACK:
+            await db.straight(386)
+            await db.turn(-90)
+            await moveRightArm(40,-270)
+            await db.straight(-100)
+            await db.turn(180)
+            await db.straight(-248)
+            await db.straight(150)
+            await db.turn(180)
+
+        if colors[0] == Color.BLUE:
+            await db.straight(520)
+            await db.turn(-90)
+            await moveRightArm(40,-270)
+            await db.straight(-100)
+            await db.turn(180)
+            await db.straight(-248)
+            await db.straight(150)
+            await db.turn(180)
+
+        if colors[0] == Color.YELLOW:
+            await db.straight(651)
+            await db.turn(-90)
+            await moveRightArm(40,-270)
+            await db.straight(-100)
+            await db.turn(180)
+            await db.straight(-456)
+            await db.straight(150)
+            await db.turn(180)
+
+    if colors[1] == Color.GREEN:
+        await db.turn(-90)
+        await db.straight(358)
+        await db.turn(90)
+        await moveLeftArm(40,-270)
+
+        if colors[0] == Color.BLUE:
+            print(colors[0])
+            await moveRightArm(40, -270)
+
+        await db.straight(-100)
+        await db.turn(180)
+        await db.straight(-310)
+
+
+        
     color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
 """
     for i in colors:
