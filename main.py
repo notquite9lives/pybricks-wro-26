@@ -4,7 +4,7 @@ from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScann
     moveLeftArm, moveRightArm, moveUntilColor, correction
 from pybricks.tools import run_task, multitask, wait
 import gc
-colors = [Color.YELLOW, Color.BLUE, Color.BLACK, Color.RED]
+colors = [Color.GREEN, Color.BLUE, Color.BLUE, Color.RED]
 
 async def main():
 
@@ -299,6 +299,7 @@ async def main():
     else:
         await db.straight(-900)
 """
+"""
     db.stop()
     db.reset()
     wait(100)
@@ -476,7 +477,7 @@ async def main():
 
     if colors[1] == Color.BLACK:
         await db.turn(-90)
-        await db.straight(205)
+        await db.straight(218)
         await db.turn(90)
         await moveLeftArm(40,-270)
 
@@ -521,13 +522,13 @@ async def main():
             await moveRightArm(40,-270)
             await db.straight(-100)
             await db.turn(180)
-            await db.straight(-448)
+            await db.straight(-453)
             await db.straight(150)
             await db.turn(180)
 
     if colors[1] == Color.BLUE:
         await db.turn(-90)
-        await db.straight(80)
+        await db.straight(72)
         await db.turn(90)
         await moveLeftArm(40, -270)
 
@@ -578,39 +579,69 @@ async def main():
 
 
 
-
-
-
-
-
-
-
-        
     color_list = [Color.RED, Color.GREEN, Color.BLACK, Color.BLUE, Color.YELLOW]
+
+    if colors[0] == Color.YELLOW:
+        await db.straight(-100)
+        await db.turn(-90)
+        await db.straight(810)
+        await db.turn(-90)
+        await db.straight(-400)
+        
+    if colors[0] == Color.BLUE:
+        await db.straight(-100)
+        await db.turn(-90)
+        await db.straight(690)
+        await db.turn(-90)
+        await db.straight(-400)
+        
+    if colors[0] == Color.BLACK:
+        await db.straight(-100)
+        await db.turn(-90)
+        await db.straight(560)
+        await db.turn(-90)
+        await db.straight(-400)
+        
+    if colors[0] == Color.GREEN:
+        await db.straight(-100)
+        await db.turn(-90)
+        await db.straight(430)
+        await db.turn(-90)
+        await db.straight(-400)
+
+    if colors[0] == Color.BLUE:
+        await db.straight(-100)
+        await db.turn(-90)
+        await db.straight(300)
+        await db.turn(-90)
+        await db.straight(-400)
 """
-    for i in colors:
-        if color_list.index(i) == colors[2]:
-            z = i*130
-            db.turn(-90)
-            db.straight(z)
-            db.turn(90)
-            db.straight(-900)
+    resetDB()
 
-    else:
-        await db.straight(90)
-        x = color_list.index(colors[3]) - color_list.index(colors[2])
-        await db.straight(-80)
-        if x > 0:
-            await db.turn(90)
-        else:
-            await db.turn(-90)
-        await db.straight(abs(x * 125 - 154))
-        await db.turn(90)
+    await multitask(
+        async_wrapper(db.straight, 268),
+        moveAttachmentArms(10, 165)
+    )
+  
+    await db.turn(90)
 
-        await db.straight(170)
-        await moveRightArm(40,-270)
-        await db.straight(-90)"""
+    await multitask(
+        async_wrapper(db.straight, 250),
+        moveAttachmentArms(10, 165)
+    )
+    await wait(100)
+    db.settings(60, 200, 80, 150)
+    await db.straight(260)    
 
+    await moveAttachmentArms(40, -260)
+    db.settings(300, 200, 80, 150)
+    await db.straight(-350)
+    await db.turn(-90)
+    await db.straight(450)  
+
+    db.settings(60, 200, 80, 150)
+    await db.straight(160) 
+    await moveAttachmentArms(40, 150)
 
 if __name__ == "__main__":
     print(db.distance_control.pid(30000, 0, 9000, 5, 10))
