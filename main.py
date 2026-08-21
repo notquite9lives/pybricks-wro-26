@@ -25,7 +25,7 @@ async def main():
         moveAttachmentArms(10, 165)
     )
 
-    await moveLeftArm(40,12-)
+    await moveRightArm(40,-12)
     await db.turn(90)
 
     await multitask(
@@ -33,7 +33,7 @@ async def main():
         moveAttachmentArms(10, 165)
     )
     await wait(100)
-    db.settings(60, 200, 80, 150)
+    db.settings(200, 200, 80, 150)
     await db.straight(260)    
 
     await moveAttachmentArms(40, -340)
@@ -43,21 +43,24 @@ async def main():
     await db.turn(-90)
     await db.straight(450)
 
-    db.settings(60, 200, 80, 150)
+    db.settings(200, 200, 80, 150)
 
-    await db.straight(180) 
+    await db.straight(185) 
     await moveAttachmentArms(40, 150)
     await db.straight(-100)
     await moveAttachmentArms(40, -150)
     await db.straight(-100)
     await db.turn(-90)
-    await db.straight(240)
+    await db.straight(249)
     await db.turn(90)
-    await db.straight(210)
+    await db.straight(208)
     await moveAttachmentArms(40, 150)
-    await moveRightArm(40, 15)
-    await db.straight(-200)
-    await db.turn(90) 
+    await moveRightArm(40, -15)
+    await db.straight(-150)
+    await moveAttachmentArms(40, 50)
+    await db.turn(-90)
+    await db.straight(780)
+    await moveLeftArm(40, -300)
 
 if __name__ == "__main__":
     print(db.distance_control.pid(30000, 0, 9000, 5, 10))
