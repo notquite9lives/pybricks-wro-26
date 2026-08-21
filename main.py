@@ -18,7 +18,7 @@ async def main():
     await resetDB()
     # yellow towers + time
 
-    resetDB()
+    await resetDB()
 
     await multitask(
         async_wrapper(db.straight, 231),
@@ -37,30 +37,18 @@ async def main():
     await db.straight(260)    
 
     await moveAttachmentArms(40, -340)
-    await moveLeftArm(40, 10)
+    await moveLeftArm(40, -10)
     db.settings(300, 200, 80, 150)
-    await db.straight(-90)
+    await db.straight(-332)
     await db.turn(-90)
     await db.straight(450)
-
-    db.settings(200, 200, 80, 150)
-
-    await db.straight(185) 
-    await moveAttachmentArms(40, 150)
-    await db.straight(-100)
-    await moveAttachmentArms(40, -150)
-    await db.straight(-100)
-    await db.turn(-90)
-    await db.straight(249)
-    await db.turn(90)
     await db.straight(208)
     await moveAttachmentArms(40, 150)
     await moveRightArm(40, -15)
-    await db.straight(-150)
+    await db.straight(-300)
     await moveAttachmentArms(40, 50)
     await db.turn(-90)
     await db.straight(780)
-    await moveLeftArm(40, -300)
 
 if __name__ == "__main__":
     print(db.distance_control.pid(30000, 0, 9000, 5, 10))
