@@ -231,7 +231,8 @@ async def yellowTowers() -> None:
 
     # picking up the towers
     db.settings(350,700,120,300)
-    await db.straight(259)
+    await db.straight(264)
+    await db.turn(-1)
     await db.turn(-90)
     db.stop()
     db.settings(260,400,150,300)
@@ -239,9 +240,7 @@ async def yellowTowers() -> None:
     db.settings(150,300,120,300)
     await db.straight(120)
     db.settings(250, 650, 150, 300)
-    await moveAttachmentArms(40, -390)
-
-
+    await moveAttachmentArms(40, -390) 
 
     # placing first tower
     db.settings(500,650,150,300)
@@ -270,7 +269,7 @@ async def yellowTowers() -> None:
     await moveAttachmentArms(38,270)
     await db.straight(-100)
     db.settings(280, 800, 160, 300)
-
+    await moveRightArm(38, 1)
 async def colorScanning():
     """
     Scans colors (of artifacts) until a list of 4, unique, valid (as defined by list validColors) is formed
@@ -385,7 +384,7 @@ async def iForgot():
     if colors[3] == Color.GREEN:
         await db.straight(300)
         await db.turn(-90)
-        await db.straight(37)
+        await db.straight(47)
         await db.turn(90)
         await db.straight(320)
     else:
@@ -513,7 +512,7 @@ async def firstPairArtifact():
     elif colors[3] == Color.GREEN:
 
         await db.turn(6)
-        await db.straight(150)
+        await db.straight(140)
         await moveLeftArm(40,-270)
 
         if colors[2] == Color.RED:
@@ -612,14 +611,14 @@ async def calibration1():
     elif colors[2] == Color.BLACK:
         await db.straight(-300)
         await db.turn(-90)
-        await db.straight(328)
+        await db.straight(240)
         await db.turn(90)
         await db.straight(-1000)
 
     elif colors[2] == Color.GREEN:
-        await db.straight(-300)
+        await db.straight(-370)
         await db.turn(-90)
-        await db.straight(130)
+        await db.straight(162)
         await db.turn(90)
         await db.straight(-1000)
 
@@ -946,7 +945,7 @@ async def calibration2():
 
 async def theRestofUs():
     await multitask(
-        async_wrapper(db.straight, 231),
+        async_wrapper(db.straight, 258),
         moveAttachmentArms(10, 165)
     )
 
@@ -974,4 +973,4 @@ async def theRestofUs():
     await db.turn(-90)
     await db.straight(780)
     await moveLeftArm(40, -300)
-
+    
