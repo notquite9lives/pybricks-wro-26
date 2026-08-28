@@ -1,13 +1,13 @@
 from pybricks.parameters import Color
 
-from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScanning, moveAttachmentArms, hub, \
-    moveLeftArm, moveRightArm, moveUntilColor, correction, scanning,artifactPickup, iForgot, firstPairArtifact, calibration1, artifactPickup2, secondPairArtifact, calibration2, theRestofUs
+from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScanning, moveAttachmentArms, hub,\
+    moveLeftArm, moveRightArm, moveUntilColor, correction, scanning,artifactPickup, iForgot, firstPairArtifact, calibration1, \
+    artifactPickup2, secondPairArtifact, calibration2, theRestofUs, calibrate
 from pybricks.tools import run_task, multitask, wait
 import gc
 colors = [Color.GREEN, Color.BLUE, Color.BLUE, Color.RED]
 
 async def main():
-
     print(round((hub.battery.voltage()-6500)/19))
     # initialization and running garbage collector
     gc.collect()
@@ -18,8 +18,9 @@ async def main():
     await resetDB()
     # yellow towers + time
 
-    await yellowTowers()
+    """await yellowTowers()
     await scanning()
+    await calibrate()
     await artifactPickup()
     await iForgot()
     await firstPairArtifact()
@@ -27,8 +28,9 @@ async def main():
     await artifactPickup2()
     await secondPairArtifact()
     await calibration2()
+    print(watch.time())"""
     await theRestofUs()
-
+    print(watch.time())
 if __name__ == "__main__":
     print(db.distance_control.pid(30000, 0, 9000, 5, 10))
     run_task(main())

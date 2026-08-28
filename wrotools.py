@@ -64,8 +64,6 @@ def convertSpeed(speed: float) -> float:
     """
     return (speed/100) * 1050
 
-
-
 async def moveAttachmentArms(speed: float, angle: int) -> None:
     """
     Moves both the attachment arms at the same time
@@ -156,7 +154,6 @@ async def moveUntilReflection(reflection: int, speed: int, distance: int = 0, us
 
     db.brake()
 
-
 async def moveUntilColor(color: Color, speed: int, distance: int = 0, use_distance: bool = False) -> None:
     """
     Makes the robot move until either:
@@ -199,7 +196,6 @@ async def moveUntilColor(color: Color, speed: int, distance: int = 0, use_distan
 
     db.brake()
 
-
 async def async_wrapper(func, *args, **kwargs):
     """
     Forces a pybricks MaybeAwaitable function to always behave like a coroutine so that it functions with the multitask() function
@@ -231,7 +227,7 @@ async def yellowTowers() -> None:
 
     # picking up the towers
     db.settings(350,700,120,300)
-    await db.straight(264)
+    await db.straight(270)
     await db.turn(-1)
     await db.turn(-90)
     db.stop()
@@ -270,6 +266,7 @@ async def yellowTowers() -> None:
     await db.straight(-100)
     db.settings(280, 800, 160, 300)
     await moveRightArm(38, 1)
+
 async def colorScanning():
     """
     Scans colors (of artifacts) until a list of 4, unique, valid (as defined by list validColors) is formed
@@ -311,7 +308,6 @@ async def colorScanning():
 
     gc.collect()
 
-
 async def correction(target_heading):
     db.settings(200, 700, 100, 200)
 
@@ -326,7 +322,6 @@ async def correction(target_heading):
         await db.turn(-shortest_error)
 
     db.settings(260, 600, 160, 300)
-
 
 async def scanHSV():
     raw = await color_sensor1.hsv()
@@ -367,26 +362,30 @@ async def scanning():
     print(colors)
     colors = colors[1]
 
-async def artifactPickup():
+async def calibrate():
     await moveAttachmentArms(40,-270)
     await db.turn(90)
     await db.straight(-250)
     db.settings(260, 600, 160, 300)
+
+async def artifactPickup():
     await db.straight(320)
     await db.turn(90)
-    await db.straight(253)
+    await db.straight(258)
     await db.turn(90)
     await db.straight(190)
     await moveAttachmentArms(30, 250)
     await db.turn(180)
 
 async def iForgot():
+    global colors
+    colors = [Color.GREEN, Color.BLUE, Color.BLUE, Color.RED]
     if colors[3] == Color.GREEN:
         await db.straight(300)
         await db.turn(-90)
-        await db.straight(47)
+        await db.straight(23)
         await db.turn(90)
-        await db.straight(320)
+        await db.straight(328)
     else:
         await db.straight(600)
 
@@ -549,7 +548,7 @@ async def firstPairArtifact():
     elif colors[3] == Color.RED:
 
         await db.turn(-87)
-        await db.straight(150)
+        await db.straight(190)
         await db.turn(90)
         await db.straight(170)
         await moveLeftArm(40,-270)
@@ -616,7 +615,7 @@ async def calibration1():
         await db.straight(-1000)
 
     elif colors[2] == Color.GREEN:
-        await db.straight(-370)
+        await db.straight(-300)
         await db.turn(-90)
         await db.straight(162)
         await db.turn(90)
@@ -633,7 +632,10 @@ async def artifactPickup2():
 
     await db.straight(300)
     await db.turn(90)
-    await db.straight(357)
+    if colors != Color.RED:
+        await db.straight(427)
+    else:
+        await db.straight(377)
     await db.turn(93)
     db.settings(140, 650, 120, 250)
     await db.straight(240)
@@ -945,32 +947,54 @@ async def calibration2():
 
 async def theRestofUs():
     await multitask(
-        async_wrapper(db.straight, 258),
-        moveAttachmentArms(10, 165)
+        async_wrapper(db.straight, 231),
+        moveAttachmentArms(10, 175)
     )
-
-    await moveRightArm(40,-12)
     await db.turn(90)
 
     await multitask(
         async_wrapper(db.straight, 250),
         moveAttachmentArms(10, 165)
     )
+
     await wait(100)
     db.settings(200, 200, 80, 150)
     await db.straight(260)    
 
-    await moveAttachmentArms(40, -340)
+    await moveAttachmentArms(40, -450)
     await moveLeftArm(40, 10)
-    db.settings(300, 200, 80, 150)
-    await db.straight(-90)
-    await db.turn(-339)
-    await db.straight(208)
-    await moveAttachmentArms(40, 150)
-    await moveRightArm(40, -15)
-    await db.straight(-150)
-    await moveAttachmentArms(40, 50)
+
+    await db.straight(-319)
     await db.turn(-90)
-    await db.straight(780)
-    await moveLeftArm(40, -300)
+    await db.straight(645)
+    db.settings(200, 200, 60, 150)
+    await moveAttachmentArms(40, 165)
+    await db.turn(-20)
+    await db.turn(40)
+    await db.turn(-20)
+    db.settings(600, 200, 200, 150)
+    await db.straight(-240)
+    await db.turn(90)
+    await db.straight(-1560)
+    await db.turn(-90)
+    await db.straight(-375)
+    await db.straight(160)
+    await db.turn(225)
+    await moveRightArm(40, -300)
+    await db.straight(-150)
+    await db.turn(-45)
+    await db.straight(-420)
+    await db.straight(280)
+    await db.turn(130)
+    await moveAttachmentArms(40, -270)
+    await db.straight(-80)
+    await db.turn(-40)
+    await db.straight(-575)
+    await moveLeftArm(40, 360)
+    await db.straight(-100)
+    await db.turn(-90)
+    await db.straight(195)
+    await db.turn(90)
+    await db.straight(100)
+    await moveRightArm(40, 360)
     
