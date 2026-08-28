@@ -5,12 +5,13 @@ from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScann
     artifactPickup2, secondPairArtifact, calibration2, theRestofUs, calibrate
 from pybricks.tools import run_task, multitask, wait
 import gc
-colors = [Color.GREEN, Color.BLUE, Color.BLUE, Color.RED]
+colors = [Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED]
 
 async def main():
     print(round((hub.battery.voltage()-6500)/19))
     # initialization and running garbage collector
     gc.collect()
+
     db.settings(240, 650, 120, 250)
     #db.settings(500, 1000, 500, 600)
     watch.reset()
@@ -20,7 +21,7 @@ async def main():
 
     """await yellowTowers()
     await scanning()
-    await calibrate()
+    await calibrate()"""
     await artifactPickup()
     await iForgot()
     await firstPairArtifact()
@@ -28,7 +29,7 @@ async def main():
     await artifactPickup2()
     await secondPairArtifact()
     await calibration2()
-    print(watch.time())"""
+    print(watch.time())
     await theRestofUs()
     print(watch.time())
 if __name__ == "__main__":
