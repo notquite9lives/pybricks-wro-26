@@ -1,9 +1,9 @@
 from pybricks.parameters import Color
 
-from wrotools import db, yellowTowers, watch, resetDB, async_wrapper, colorScanning, moveAttachmentArms, hub,\
-    moveLeftArm, moveRightArm, moveUntilColor, correction, scanning,artifactPickup, iForgot, firstPairArtifact, calibration1, \
-    artifactPickup2, secondPairArtifact, calibration2, theRestofUs, calibrate
-from pybricks.tools import run_task, multitask, wait
+from wrotools import db, yellowTowers, watch, resetDB, hub,\
+    scanning,artifactPickup, iForgot, firstPairArtifact, calibration1, \
+    artifactPickup2, secondPairArtifact, calibration2, theRestofUs, calibrate, scanHSV
+from pybricks.tools import run_task
 import gc
 colors = [Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED]
     
@@ -18,8 +18,8 @@ async def main():
     watch.resume()
     await resetDB()
     # yellow towers + time
-    
-    await yellowTowers()
+    print(await scanHSV())
+    """await yellowTowers()
     await scanning()
     await calibrate()
     await artifactPickup()
@@ -31,8 +31,8 @@ async def main():
     await calibration2()
     print(watch.time())
     await theRestofUs()
-    print(watch.time())
+    print(watch.time())"""
 if __name__ == "__main__":
-    print(db.distance_control.pid(22000, 0, 9000, 5, 10))
+    print(db.distance_control.pid(24000, 0, 9000, 5, 10))
     run_task(main())
  

@@ -286,19 +286,27 @@ async def colorScanning():
         h, s, v = await scanHSV()
 
         finalDebounce = 3
-        if 0 <= currentReflection <= 5:
+        if 235 <= h <= 245:
             black_debounce_count += 1
             if black_debounce_count >= finalDebounce:
                 if Color.BLACK not in cleanedList:
                     cleanedList.append(Color.BLACK)
-                    print(Color.BLACK, currentReflection)
-        elif currentScan in validColors:
+                    print(Color.BLACK)
+        elif h < 20 or v == 0 or s == 0:
             black_debounce_count = 0
-            if currentScan not in cleanedList:
-                cleanedList.append(currentScan)
-                print(currentScan, currentReflection)
         else:
-            black_debounce_count = 0 
+            if 35 <= h <= 45:
+                cleanedList.append(Color.YELLOW)
+                print(Color.YELLOW)
+            elif 345 <= h <= 355:
+                cleanedList.append(Color.RED)
+                print(Color.RED)
+            elif 155 <= h <= 165:
+                cleanedList.append(Color.GREEN)
+                print(Color.GREEN)
+            elif 210 <= h <= 220:
+                cleanedList.append(Color.BLUE)
+                print(Color.BLUE)
 
         if len(cleanedList) == 4:
             print(cleanedList)
@@ -327,7 +335,7 @@ async def correction(target_heading):
     db.settings(260, 600, 160, 300)
 
 async def scanHSV():
-    raw = await color_sensor1.hsv()
+    raw = await color_sensor2.hsv()
     return raw.h, raw.s, raw.v
 
 async def moveUntilHSV(hue: int, saturation: int, value: int = 0, speed: int = 30):
