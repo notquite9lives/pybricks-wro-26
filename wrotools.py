@@ -284,14 +284,7 @@ async def colorScanning():
 
         h, s, v = await scanHSV()
 
-        finalDebounce = 3
-        if 225 <= h <= 255:
-            black_debounce_count += 1
-            if black_debounce_count >= finalDebounce:
-                if Color.BLACK not in cleanedList:
-                    cleanedList.append(Color.BLACK)
-                    print(Color.BLACK)
-        elif h < 20 or v == 0 or s == 0:
+        if h < 20 or v == 0 or s == 0:
             black_debounce_count = 0
         else:
             if 35 <= h <= 45 and Color.YELLOW not in cleanedList:
@@ -310,6 +303,9 @@ async def colorScanning():
                 cleanedList.append(Color.BLUE)
                 print(Color.BLUE, h, s, v)
                 print(watch.time())
+            elif 225 <= h <= 255 and Color.BLACK not in cleanedList:
+                cleanedList.append(Color.BLACK)
+                print(Color.BLACK)
 
         if len(cleanedList) == 4:
             print(cleanedList)
