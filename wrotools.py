@@ -285,7 +285,7 @@ async def colorScanning():
                 cleanedList.append(Color.YELLOW)
                 print(Color.YELLOW, h, s, v)
                 print(watch.time())
-        elif 345 <= h <= 355 and Color.RED not in cleanedList:
+        elif (345 <= h  or h <= 15) and Color.RED not in cleanedList:
                 cleanedList.append(Color.RED)
                 print(Color.RED, h, s, v)
                 print(watch.time())
