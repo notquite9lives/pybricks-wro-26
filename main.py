@@ -13,15 +13,15 @@ async def main():
     gc.collect()
 
     db.settings(240, 650, 120, 250)
-    #db.settings(500, 1000, 500, 600)
+    #db.settings(500, 1000, 500X, 600)
     watch.reset()
     watch.resume()
     await resetDB()
     # yellow towers + time
 
-    """await yellowTowers()
+    await yellowTowers()
     await scanning()
-    await calibrate()"""
+    await calibrate()
     await artifactPickup()
     await iForgot()
     await firstPairArtifact()
