@@ -36,8 +36,6 @@ watch: StopWatch = StopWatch()
 watch.reset()
 hub.imu.reset_heading(0)
 validColors = [Color.RED, Color.BLUE, Color.GREEN, Color.BLACK, Color.YELLOW]
-colors = [Color.GREEN,  Color.YELLOW, Color.BLACK, Color.RED]
-
 
 
 # HELPER FUNCTIONS
@@ -221,16 +219,16 @@ async def yellowTowers() -> None:
     - Moving and placing the tower tops on the bases
     """
 
-    db.distance_control.pid(10000, 0, 9000, 5, 10)
+    #db.distance_control.pid(10000, 0, 9000, 5, 10)
 
     db.settings(340, 900, 150, 300)
 
     # calibration
     await multitask(async_wrapper(db.straight, -500), moveAttachmentArms(60, 450))
 
-    # picking up the towers
+    # picking up the tower
     db.settings(350,700,120,300)
-    await db.straight(278)
+    await db.straight(275)
     await db.turn(-1)
     await db.turn(-90)
     db.stop()
@@ -239,19 +237,19 @@ async def yellowTowers() -> None:
     await db.straight(202)
     db.settings(150,300,120,300)
     await db.straight(120)
-    db.settings(250, 650, 150, 300)
+    db.settings(400, 650, 150, 300)
     await moveAttachmentArms(40, -390) 
 
     # placing first tower
     db.settings(500,650,150,300)
-    await db.straight(-58)
+    await db.straight(-65)
     await db.turn(90)
     await db.straight(503)
     await moveUntilReflection(20, 45, 100) #fill distance properly
     db.settings(240, 700, 120, 250)
-    await db.straight(435)
+    await db.straight(440)
     await moveAttachmentArms(40,270)
-    await db.straight(-210)
+    await db.straight(-220)
     db.settings(280, 800, 160, 300)
 
     # calibration
@@ -265,7 +263,7 @@ async def yellowTowers() -> None:
     await multitask(async_wrapper(db.straight, 320), moveAttachmentArms(40, -270))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
-    await db.straight(215)
+    await db.straight(218)
     await moveAttachmentArms(38,270)
     await db.straight(-100)
     db.settings(280, 800, 160, 300)
@@ -285,19 +283,20 @@ async def colorScanning():
     while True:
         currentReflection = await color_sensor2.reflection()
         currentScan = await color_sensor2.color()
-        currentHSV = await color_sensor2.hsv()
+        h, s, v = await scanHSV()
+
         finalDebounce = 3
-        if 3 <= currentReflection <= 9:
+        if 0 <= currentReflection <= 5:
             black_debounce_count += 1
             if black_debounce_count >= finalDebounce:
                 if Color.BLACK not in cleanedList:
                     cleanedList.append(Color.BLACK)
-                    print(Color.BLACK, currentReflection, currentHSV)
+                    print(Color.BLACK, currentReflection)
         elif currentScan in validColors:
             black_debounce_count = 0
             if currentScan not in cleanedList:
                 cleanedList.append(currentScan)
-                print(currentScan, currentReflection, currentHSV)
+                print(currentScan, currentReflection)
         else:
             black_debounce_count = 0 
 
@@ -360,7 +359,7 @@ async def scanning():
     await db.turn(-90)
     await db.straight(-100)
     await db.turn(-4)
-    await db.straight(20)
+    await db.straight(30)
     db.settings(250, 700, 150, 300)
     colors = await multitask(async_wrapper(db.straight, 690), colorScanning())
     print(colors)
@@ -370,12 +369,12 @@ async def calibrate():
     await moveAttachmentArms(40,-270)
     await db.turn(90)
     await db.straight(-250)
-    db.settings(260, 600, 160, 300)
+    db.settings(300, 600, 160, 300)
 
 async def artifactPickup():
     await db.straight(320)
     await db.turn(90)
-    await db.straight(244)
+    await db.straight(265)
     await db.turn(90)
     await db.straight(190)
     await moveAttachmentArms(30, 250)
@@ -383,7 +382,6 @@ async def artifactPickup():
 
 async def iForgot():
     global colors
-    colors = [Color.GREEN, Color.BLUE, Color.BLUE, Color.YELLOW]
     if colors[3] == Color.GREEN:
         await db.straight(300)
         await db.turn(-90)
@@ -399,9 +397,9 @@ async def firstPairArtifact():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(344)
+        await db.straight(400)
         await db.turn(-90)
-        await db.straight(188)
+        await db.straight(172)
         await moveLeftArm(40,-270)
 
         if colors[2] == Color.BLUE:
@@ -640,7 +638,7 @@ async def artifactPickup2():
     if colors != Color.RED:
         await db.straight(427)
     else:
-        await db.straight(284)
+        await db.straight(244)
     await db.turn(93)
     db.settings(140, 650, 120, 250)
     await db.straight(270)
