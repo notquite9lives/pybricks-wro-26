@@ -285,7 +285,7 @@ async def colorScanning():
         h, s, v = await scanHSV()
 
         finalDebounce = 3
-        if 230 <= h <= 250:
+        if 225 <= h <= 255:
             black_debounce_count += 1
             if black_debounce_count >= finalDebounce:
                 if Color.BLACK not in cleanedList:
