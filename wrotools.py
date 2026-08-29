@@ -295,16 +295,16 @@ async def colorScanning():
         elif h < 20 or v == 0 or s == 0:
             black_debounce_count = 0
         else:
-            if 35 <= h <= 45:
+            if 35 <= h <= 45 and Color.YELLOW not in cleanedList:
                 cleanedList.append(Color.YELLOW)
                 print(Color.YELLOW)
-            elif 345 <= h <= 355:
+            elif 345 <= h <= 355 and Color.RED not in cleanedList:
                 cleanedList.append(Color.RED)
                 print(Color.RED)
-            elif 155 <= h <= 165:
+            elif 155 <= h <= 165 and Color.GREEN not in cleanedList:
                 cleanedList.append(Color.GREEN)
                 print(Color.GREEN)
-            elif 210 <= h <= 220:
+            elif 210 <= h <= 220 and Color.BLUE not in cleanedList:
                 cleanedList.append(Color.BLUE)
                 print(Color.BLUE)
 
@@ -318,19 +318,6 @@ async def colorScanning():
 
 
     gc.collect()
-
-async def correction(target_heading):
-    db.settings(200, 700, 100, 200)
-
-    # 1. Calculate raw difference
-    error = hub.imu.heading() - target_heading
-
-    # 2. Wrap error into range [-180, 180] for the shortest path
-    shortest_error = (error + 180) % 360 - 180
-
-    # 3. Turn to eliminate the error
-    if not (-0.5 < shortest_error < 0.5):
-        await db.turn(-shortest_error)
 
     db.settings(260, 600, 160, 300)
 
