@@ -228,7 +228,7 @@ async def yellowTowers() -> None:
 
     # picking up the tower
     db.settings(350,700,120,300)
-    await db.straight(275)
+    await db.straight(283)
     await db.turn(-1)
     await db.turn(-90)
     db.stop()
@@ -374,7 +374,7 @@ async def calibrate():
 async def artifactPickup():
     await db.straight(320)
     await db.turn(90)
-    await db.straight(265)
+    await db.straight(273)
     await db.turn(90)
     await db.straight(190)
     await moveAttachmentArms(30, 250)
