@@ -896,7 +896,7 @@ async def secondPairArtifact():
             await db.straight(150)
             await db.turn(180)
 
-async def calibration2():
+async def       calibration2():
 
     if colors[0] == Color.YELLOW:
         await db.straight(-100)
@@ -934,6 +934,7 @@ async def calibration2():
         await db.straight(-400)
 
 async def theRestofUs():
+    db.settings(750, 550, 200, 300)
     await multitask(
         async_wrapper(db.straight, 231),
         moveAttachmentArms(10, 175)
@@ -942,11 +943,11 @@ async def theRestofUs():
 
     await multitask(
         async_wrapper(db.straight, 250),
-        moveAttachmentArms(10, 165)
+        moveAttachmentArms(10, 155)
     )
 
     await wait(100)
-    db.settings(200, 200, 80, 150)
+    db.settings(600, 850, 300, 450)
     await db.straight(260)    
 
     await moveAttachmentArms(40, -450)
@@ -955,12 +956,12 @@ async def theRestofUs():
     await db.straight(-319)
     await db.turn(-90)
     await db.straight(645)
-    db.settings(200, 200, 60, 150)
+    db.settings(750, 800, 120, 150)
     await moveAttachmentArms(40, 165)
     await db.turn(-15)
     await db.turn(30)
     await db.turn(-15)
-    db.settings(600, 200, 200, 150)
+    db.settings(800, 600, 200, 150)
     await db.straight(-240)
     await db.turn(90)
     await db.straight(-1560)
