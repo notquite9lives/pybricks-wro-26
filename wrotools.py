@@ -35,7 +35,7 @@ db.use_gyro(True)
 watch: StopWatch = StopWatch()
 watch.reset()
 hub.imu.reset_heading(0)
-validColors = [Color.RED, Color.BLUE, Color.GREEN, Color.BLACK, Color.YELLOW]
+
 
 
 # HELPER FUNCTIONS
@@ -228,7 +228,7 @@ async def yellowTowers() -> None:
 
     # picking up the tower
     db.settings(350,700,120,300)
-    await db.straight(283)
+    await db.straight(272)
     await db.turn(-1)
     await db.turn(-90)
     db.stop()
@@ -242,19 +242,19 @@ async def yellowTowers() -> None:
 
     # placing first tower
     db.settings(500,650,150,300)
-    await db.straight(-65)
+    await db.straight(-68)
     await db.turn(90)
-    await db.straight(503)
+    await db.straight(513)
     await moveUntilReflection(20, 45, 100) #fill distance properly
     db.settings(240, 700, 120, 250)
-    await db.straight(440)
+    await db.straight(445)
     await moveAttachmentArms(40,270)
-    await db.straight(-220)
+    await db.straight(-235)
     db.settings(280, 800, 160, 300)
 
     # calibration
     await db.turn(90)
-    await db.straight(-300)
+    await db.straight(-307)
 
 
     # placing second tower
@@ -263,7 +263,7 @@ async def yellowTowers() -> None:
     await multitask(async_wrapper(db.straight, 320), moveAttachmentArms(40, -270))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
-    await db.straight(218)
+    await db.straight(233)
     await moveAttachmentArms(38,270)
     await db.straight(-100)
     db.settings(280, 800, 160, 300)
@@ -279,31 +279,32 @@ async def colorScanning():
     """
     cleanedList = []
     black_debounce_count = 0
-    watch.reset()
-    while True:
 
+    while True:
+        currentReflection = await color_sensor2.reflection()
+        currentScan = await color_sensor2.color()
         h, s, v = await scanHSV()
 
-        if h < 20 or v == 0 or s == 0:
+        finalDebounce = 3
+        if 221 <= h <= 280:
+            black_debounce_count += 1
+            if black_debounce_count >= finalDebounce:
+                if Color.BLACK not in cleanedList:
+                    cleanedList.append(Color.BLACK)
+                    print(Color.BLACK)
+        elif h < 20 or v == 0 or s == 0:
             black_debounce_count = 0
         else:
             if 35 <= h <= 45 and Color.YELLOW not in cleanedList:
                 cleanedList.append(Color.YELLOW)
-                print(Color.YELLOW, h, s, v)
-                print(watch.time())
+                print(Color.YELLOW)
             elif 345 <= h <= 355 and Color.RED not in cleanedList:
                 cleanedList.append(Color.RED)
-                print(Color.RED, h, s, v)
-                print(watch.time())
+                print(Color.RED)
             elif 155 <= h <= 165 and Color.GREEN not in cleanedList:
                 cleanedList.append(Color.GREEN)
-                print(Color.GREEN, h, s, v)
-                print(watch.time())
-            elif 210 <= h <= 220 and Color.BLUE not in cleanedList:
-                cleanedList.append(Color.BLUE)
-                print(Color.BLUE, h, s, v)
-                print(watch.time())
-            elif 225 <= h <= 255 and Color.BLACK not in cleanedList:
+                print(Color.GREEN)
+            elif 221 <= h <= 280 and Color.BLACK not in cleanedList:
                 cleanedList.append(Color.BLACK)
                 print(Color.BLACK)
 
@@ -317,6 +318,19 @@ async def colorScanning():
 
 
     gc.collect()
+
+async def correction(target_heading):
+    db.settings(200, 700, 100, 200)
+
+    # 1. Calculate raw difference
+    error = hub.imu.heading() - target_heading
+
+    # 2. Wrap error into range [-180, 180] for the shortest path
+    shortest_error = (error + 180) % 360 - 180
+
+    # 3. Turn to eliminate the error
+    if not (-0.5 < shortest_error < 0.5):
+        await db.turn(-shortest_error)
 
     db.settings(260, 600, 160, 300)
 
@@ -379,9 +393,9 @@ async def iForgot():
     if colors[3] == Color.GREEN:
         await db.straight(300)
         await db.turn(-90)
-        await db.straight(58)
+        await db.straight(47)
         await db.turn(90)
-        await db.straight(336)
+        await db.straight(326)
     else:
         await db.straight(600)
 
@@ -391,7 +405,7 @@ async def firstPairArtifact():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(400)
+        await db.straight(412)
         await db.turn(-90)
         await db.straight(172)
         await moveLeftArm(40,-270)
@@ -432,7 +446,7 @@ async def firstPairArtifact():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(220)
+        await db.straight(232)
         await db.turn(-2)
         await db.turn(-90)
         await db.straight(182)
@@ -470,7 +484,7 @@ async def firstPairArtifact():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(92)
+        await db.straight(112)
         await db.turn(-90)
         await db.straight(172)
         await moveLeftArm(40,-270)
@@ -491,9 +505,9 @@ async def firstPairArtifact():
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(250)
+            await db.straight(266)
             await db.turn(-90)
-            await db.straight(147)
+            await db.straight(138)
             await moveRightArm(40, -270)
 
         elif colors[2] == Color.YELLOW:
@@ -536,7 +550,7 @@ async def firstPairArtifact():
             await db.turn(-2)
             await db.straight(-350)
             await db.turn(90)
-            await db.straight(503)
+            await db.straight(513)
             await db.turn(-90)
             await db.straight(356)
             await db.turn(1)
@@ -545,7 +559,7 @@ async def firstPairArtifact():
     elif colors[3] == Color.RED:
 
         await db.turn(-87)
-        await db.straight(180)
+        await db.straight(192)
         await db.turn(90)
         await db.straight(165)
         await moveLeftArm(40,-270)
@@ -994,4 +1008,3 @@ async def theRestofUs():
     await db.turn(90)
     await db.straight(100)
     await moveRightArm(40, 360)
-    

@@ -19,7 +19,7 @@ async def main():
     await resetDB()
     # yellow towers + time
     print(await scanHSV())
-    """await yellowTowers()
+    await yellowTowers()
     await scanning()
     await calibrate()
     await artifactPickup()
@@ -31,7 +31,7 @@ async def main():
     await calibration2()
     print(watch.time())
     await theRestofUs()
-    print(watch.time())"""
+    print(watch.time())
 if __name__ == "__main__":
     print(db.distance_control.pid(24000, 0, 9000, 5, 10))
     run_task(main())
