@@ -247,9 +247,9 @@ async def yellowTowers() -> None:
     await db.straight(513)
     await moveUntilReflection(20, 45, 100) #fill distance properly
     db.settings(240, 700, 120, 250)
-    await db.straight(445)
+    await db.straight(432)
     await moveAttachmentArms(40,270)
-    await db.straight(-235)
+    await db.straight(-222)
     db.settings(280, 800, 160, 300)
 
     # calibration
@@ -263,9 +263,9 @@ async def yellowTowers() -> None:
     await multitask(async_wrapper(db.straight, 320), moveAttachmentArms(40, -270))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
-    await db.straight(233)
+    await db.straight(223)
     await moveAttachmentArms(38,270)
-    await db.straight(-100)
+    await db.straight(-90)
     db.settings(280, 800, 160, 300)
     await moveRightArm(38, 1)
 
@@ -310,7 +310,6 @@ async def colorScanning():
     gc.collect()
     return cleanedList
 
-
 async def scanHSV():
     raw = await color_sensor2.hsv()
     return raw.h, raw.s, raw.v
@@ -349,7 +348,7 @@ async def scanning():
     colors = await multitask(async_wrapper(db.straight, 690), colorScanning())
     print(colors)
     colors = colors[1]
-
+    
 async def calibrate():
     await moveAttachmentArms(40,-270)
     await db.turn(90)
@@ -359,7 +358,7 @@ async def calibrate():
 async def artifactPickup():
     await db.straight(320)
     await db.turn(90)
-    await db.straight(273)
+    await db.straight(288)
     await db.turn(90)
     await db.straight(190)
     await moveAttachmentArms(30, 250)
