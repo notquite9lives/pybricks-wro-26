@@ -278,33 +278,26 @@ async def colorScanning():
 
     """
     cleanedList = []
-    black_debounce_count = 0
-
+    watch.reset()
     while True:
-        currentReflection = await color_sensor2.reflection()
-        currentScan = await color_sensor2.color()
         h, s, v = await scanHSV()
-
-        finalDebounce = 3
-        if 221 <= h <= 280:
-            black_debounce_count += 1
-            if black_debounce_count >= finalDebounce:
-                if Color.BLACK not in cleanedList:
-                    cleanedList.append(Color.BLACK)
-                    print(Color.BLACK)
-        elif h < 20 or v == 0 or s == 0:
-            black_debounce_count = 0
-        else:
-            if 35 <= h <= 45 and Color.YELLOW not in cleanedList:
+        if 35 <= h <= 45 and Color.YELLOW not in cleanedList:
                 cleanedList.append(Color.YELLOW)
-                print(Color.YELLOW)
-            elif 345 <= h <= 355 and Color.RED not in cleanedList:
+                print(Color.YELLOW, h, s, v)
+                print(watch.time())
+        elif (345 <= h  or h <= 15) and Color.RED not in cleanedList:
                 cleanedList.append(Color.RED)
-                print(Color.RED)
-            elif 155 <= h <= 165 and Color.GREEN not in cleanedList:
+                print(Color.RED, h, s, v)
+                print(watch.time())
+        elif 155 <= h <= 165 and Color.GREEN not in cleanedList:
                 cleanedList.append(Color.GREEN)
-                print(Color.GREEN)
-            elif 221 <= h <= 280 and Color.BLACK not in cleanedList:
+                print(Color.GREEN, h, s, v)
+                print(watch.time())
+        elif 210 <= h <= 220 and Color.BLUE not in cleanedList:
+                cleanedList.append(Color.BLUE)
+                print(Color.BLUE, h, s, v)
+                print(watch.time())
+        elif 225 <= h <= 255 and 5 <= s <= 20 and Color.BLACK not in cleanedList:
                 cleanedList.append(Color.BLACK)
                 print(Color.BLACK)
 
