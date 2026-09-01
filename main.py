@@ -5,7 +5,7 @@ from wrotools import db, yellowTowers, watch, resetDB, hub,\
     artifactPickup2, secondPairArtifact, calibration2, theRestofUs, calibrate, scanHSV
 from pybricks.tools import run_task
 import gc
-colors = [Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED]
+#colors = [Color.GREEN, Color.YELLOW, Color.BLACK, Color.RED]
     
 async def main():
     print(round((hub.battery.voltage()-6500)/19))
@@ -18,10 +18,10 @@ async def main():
     watch.resume()
     await resetDB()
     # yellow towers + time
-    print(await scanHSV())
+    """print(await scanHSV())
     await yellowTowers()
     await scanning()
-    await calibrate()
+    await calibrate()"""
     await artifactPickup()
     await iForgot()
     await firstPairArtifact()
