@@ -227,30 +227,32 @@ async def yellowTowers() -> None:
     await multitask(async_wrapper(db.straight, -500), moveAttachmentArms(60, 450))
 
     # picking up the tower
-    db.settings(350,700,120,300)
-    await db.straight(268)
+    db.settings(1000,900,120,300)
+    await db.straight(264)
     await db.turn(-1)
     await db.turn(-90)
     db.stop()
     db.distance_control.pid(30000, 0, 9000, 5, 10)
     db.settings(260,400,150,300)
+    await db.turn(1)
     await db.straight(202)
     db.settings(150,300,120,300)
     await db.straight(120)
-    db.settings(400, 650, 150, 300)
+    db.settings(1000, 900, 150, 300)
     await moveAttachmentArms(40, -390) 
 
     # placing first tower
-    db.settings(500,650,150,300)
+    db.settings(1000,850,150,300)
     await db.straight(-68)
     await db.turn(90)
     await db.straight(513)
     await moveUntilReflection(20, 45, 100) #fill distance properly
-    db.settings(240, 700, 120, 250)
-    await db.straight(432)
+    db.settings(550, 350, 120, 250)
+    await db.turn(1)
+    await db.straight(436)
     await moveAttachmentArms(40,270)
     await db.straight(-222)
-    db.settings(280, 800, 160, 300)
+    db.settings(500, 800, 160, 300)
 
     # calibration
     await db.turn(90)
@@ -263,7 +265,7 @@ async def yellowTowers() -> None:
     await multitask(async_wrapper(db.straight, 320), moveAttachmentArms(40, -270))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
-    await db.straight(223)
+    await db.straight(228)
     await moveAttachmentArms(38,270)
     await db.straight(-90)
     db.settings(280, 800, 160, 300)
@@ -356,8 +358,6 @@ async def calibrate():
     db.settings(300, 600, 160, 300)
 
 async def artifactPickup():
-    global colors
-    colors = [Color.BLUE, Color.RED, Color.RED, Color.BLUE]
     await db.straight(320)
     await db.turn(90)
     await db.straight(281)
@@ -894,7 +894,7 @@ async def secondPairArtifact():
             await db.straight(150)
             await db.turn(180)
 
-async def       calibration2():
+async def calibration2():
 
     if colors[0] == Color.YELLOW:
         await db.straight(-100)
