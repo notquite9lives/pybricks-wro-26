@@ -18,8 +18,13 @@ async def main():
     watch.resume()
     await resetDB()
     # yellow towers + time
+<<<<<<< HEAD
     """print(await scanHSV())
     await yellowTowers()
+=======
+    print(await scanHSV())
+    """ await yellowTowers()
+>>>>>>> 290d97cbfd3bd32cafc8d137f9efd6fb8870dba7
     await scanning()
     await calibrate()"""
     await artifactPickup()
@@ -29,7 +34,7 @@ async def main():
     await artifactPickup2()
     await secondPairArtifact()
     await calibration2()
-    print(watch.time())
+    print(watch.time())"""
     await theRestofUs()
     print(watch.time())
 if __name__ == "__main__":
