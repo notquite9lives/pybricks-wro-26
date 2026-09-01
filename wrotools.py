@@ -357,7 +357,7 @@ async def calibrate():
 
 async def artifactPickup():
     global colors
-    colors = [Color.BLUE, Color.RED, Color.YELLOW, Color.GREEN]
+    colors = [Color.BLUE, Color.RED, Color.RED, Color.BLUE]
     await db.straight(320)
     await db.turn(90)
     await db.straight(281)
@@ -367,11 +367,11 @@ async def artifactPickup():
     await db.turn(180)
 
 async def iForgot():
-    global colors
+    db.settings(480, 600, 160, 300)
     if colors[3] == Color.GREEN:
         await db.straight(300)
         await db.turn(-90)
-        await db.straight(28)
+        await db.straight(25)
         await db.turn(90)
         await db.straight(326)
     else:
@@ -424,10 +424,10 @@ async def firstPairArtifact():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(232)
+        await db.straight(262)
         await db.turn(-2)
         await db.turn(-90)
-        await db.straight(182)
+        await db.straight(178)
         await moveLeftArm(40,-270)
 
         if colors[2] == Color.BLACK:
@@ -462,7 +462,7 @@ async def firstPairArtifact():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(70)
+        await db.straight(110)
         await db.turn(-90)
         await db.straight(174)
         await moveLeftArm(40,-270)
@@ -474,25 +474,25 @@ async def firstPairArtifact():
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(-90)
-            await db.straight(143)
+            await db.straight(139)
             await db.turn(90)
-            await db.straight(143)
+            await db.straight(139)
             await moveRightArm(40,-270)
 
         elif colors[2] == Color.BLUE:
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(266)
+            await db.straight(258)
             await db.turn(-90)
-            await db.straight(138)
+            await db.straight(143)
             await moveRightArm(40, -270)
 
         elif colors[2] == Color.YELLOW:
             await db.turn(-2)
             await db.straight(-350)
             await db.turn(90)
-            await db.straight(380)
+            await db.straight(378)
             await db.turn(-90)
             await db.straight(350)
             await db.turn(1)
@@ -501,7 +501,7 @@ async def firstPairArtifact():
     elif colors[3] == Color.GREEN:
 
         await db.turn(6)
-        await db.straight(147)
+        await db.straight(142)
         await moveLeftArm(40,-270)
 
         if colors[2] == Color.RED:
@@ -511,24 +511,24 @@ async def firstPairArtifact():
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(245)
+            await db.straight(243)
             await db.turn(-90)
-            await db.straight(140)
+            await db.straight(144)
             await moveRightArm(40, -270)
 
         elif colors[2] == Color.BLUE:
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(380)
+            await db.straight(370)
             await db.turn(-90)
-            await db.straight(158)
+            await db.straight(142)
             await moveRightArm(40, -270)
 
         elif colors[2] == Color.YELLOW:
             await db.turn(-2)
             await db.straight(-350)
             await db.turn(90)
-            await db.straight(505)
+            await db.straight(496)
             await db.turn(-90)
             await db.straight(336)
             await db.turn(1)
@@ -536,8 +536,8 @@ async def firstPairArtifact():
     
     elif colors[3] == Color.RED:
 
-        await db.turn(-87)
-        await db.straight(192)
+        await db.turn(-86)
+        await db.straight(155)
         await db.turn(90)
         await db.straight(165)
         await moveLeftArm(40,-270)
@@ -548,25 +548,25 @@ async def firstPairArtifact():
             await db.turn(90)
             await db.straight(245)
             await db.turn(-90)
-            await db.straight(137)
+            await db.straight(132)
             await moveRightArm(40, -270)
 
         elif colors[2] == Color.BLACK:
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(377)
+            await db.straight(386)
             await db.turn(-90)
-            await db.straight(140)
+            await db.straight(130)
             await moveRightArm(40, -270)
 
         elif colors[2] == Color.BLUE:
             await db.turn(-1)
             await db.straight(-140)
             await db.turn(90)
-            await db.straight(502)
+            await db.straight(512)
             await db.turn(-90)
-            await db.straight(140)
+            await db.straight(130)
             await db.turn(1)
             await moveRightArm(40, -270)
 
@@ -621,10 +621,7 @@ async def artifactPickup2():
 
     await db.straight(300)
     await db.turn(90)
-    if colors != Color.RED:
-        await db.straight(427)
-    else:
-        await db.straight(204)
+    await db.straight(295)
     await db.turn(93)
     db.settings(140, 650, 120, 250)
     await db.straight(270)
