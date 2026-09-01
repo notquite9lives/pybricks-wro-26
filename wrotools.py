@@ -937,28 +937,31 @@ async def       calibration2():
 async def theRestofUs():
     db.settings(750, 550, 200, 300)
     await multitask(
-        async_wrapper(db.straight, 231),
+        async_wrapper(db.straight, 240),
         moveAttachmentArms(10, 175)
     )
+    await db.turn(2)
     await db.turn(90)
 
     await multitask(
-        async_wrapper(db.straight, 250),
-        moveAttachmentArms(10, 155)
+        async_wrapper(db.straight, 280),
+        moveAttachmentArms(10, 178)
     )
-
-    await wait(100)
-    db.settings(600, 850, 300, 450)
-    await db.straight(260)    
+    db.settings(120, 85, 300, 450)
+    await db.straight(5)
+    await db.straight(260)
 
     await moveAttachmentArms(40, -450)
-    await moveLeftArm(40, 10)
+    await moveLeftArm(40, -10)
 
-    await db.straight(-319)
+    db.settings(750, 550, 200, 300)
+    await db.straight(-369)
     await db.turn(-90)
-    await db.straight(645)
-    db.settings(750, 800, 120, 150)
+    await db.straight(630)
+    db.settings(120, 300, 120, 150)
+    await db.straight(15)
     await moveAttachmentArms(40, 165)
+    db.settings(900, 800, 500, 550)
     await db.turn(-15)
     await db.turn(30)
     await db.turn(-15)
