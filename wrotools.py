@@ -687,7 +687,7 @@ async def secondPairArtifact():
 
         # 26, 36, 48.5 62.5
         await db.turn(-90)
-        await db.straight(488)
+        await db.straight(458)
         await db.turn(90)
         await moveLeftArm(40,-270)
         await db.straight(-100)
@@ -934,7 +934,7 @@ async def calibration2():
 async def theRestofUs():
     db.settings(750, 550, 200, 300)
     await multitask(
-        async_wrapper(db.straight, 240),
+        async_wrapper(db.straight, 243),
         moveAttachmentArms(10, 175)
     )
     await db.turn(2)
@@ -942,7 +942,7 @@ async def theRestofUs():
 
     await multitask(
         async_wrapper(db.straight, 280),
-        moveAttachmentArms(10, 178)
+        moveAttachmentArms(10, 158)
     )
     db.settings(120, 85, 300, 450)
     await db.straight(5)
