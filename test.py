@@ -1,2 +1,8 @@
+from wrotools import scanHSV
+from pybricks.tools import run_task
+async def main():
+    print(await scanHSV())
 
-from pybricks.tools import run_task, multitask
+
+
+run_task(main())
