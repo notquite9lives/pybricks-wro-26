@@ -8,3 +8,8 @@
 - Cleaned up the code and made the first task function
 - Introduced a new async wrapper function to save space rather than making a new wrapper function each time
 - Began planning and working on the next task
+
+... changelog is dead probably
+
+25/7/2026:
+
