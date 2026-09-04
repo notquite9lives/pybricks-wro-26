@@ -946,7 +946,7 @@ async def theRestofUs():
     )
     db.settings(120, 85, 300, 450)
     await db.straight(5)
-    await db.straight(260)
+    await db.straight(220)
 
     await moveAttachmentArms(40, -450)
     await moveLeftArm(40, -10)
@@ -994,3 +994,55 @@ async def theRestofUs():
     await db.turn(90)
     await db.straight(100)
     await moveRightArm(40, 360)
+
+async def dist(n):
+    return umath.sqrt(n[0]**2 + n[1]**2 + n[2]**2)
+
+async def colorScanning2():
+    """
+    Scans colors (of artifacts) until a list of 4, unique, valid (as defined by list validColors) is formed
+
+    :return: The list of scanned colors
+    :rtype: list[Color]
+
+    """
+    cleanedList = []
+    Rf = (349, 87, 25)
+    Rc = (352, 92, 94)
+    Bf = (180, 0, 5)
+    Bc = (180, 5, 14)
+    Gf = (156, 64, 13)
+    Gc = (154, 89, 46)
+    Df = (210, 20, 10)
+    Dc = (180, 17, 22)
+    Yf = (37, 69, 45)
+    Yc = (60, 37, 100)
+
+    while True:
+        h, s, v = await scanHSV()
+        d = await dist((h, s, v))
+        Rd = min(umath.fabs(d - await dist(Rc)), umath.fabs(d - await dist(Rf)))
+        Bd = min(umath.fabs(d - await dist(Bc)), umath.fabs(d - await dist(Bf)))
+        Gd = min(umath.fabs(d - await dist(Gc)), umath.fabs(d - await dist(Gf)))
+        Dd = min(umath.fabs(d - await dist(Dc)), umath.fabs(d - await dist(Df)))
+        Yd = min(umath.fabs(d - await dist(Yc)), umath.fabs(d - await dist(Yf)))
+        if min(Rd, Bd, Gd, Dd, Yd) < 25:
+            if Rd == min(Rd, Bd, Gd, Dd, Yd):
+                cleanedList.append(Color.RED)
+            elif Bd == min(Rd, Bd, Gd, Dd, Yd):
+                cleanedList.append(Color.BLUE)
+            elif Gd == min(Rd, Bd, Gd, Dd, Yd):
+                cleanedList.append(Color.GREEN)
+            elif Yd == min(Rd, Bd, Gd, Dd, Yd):
+                cleanedList.append(Color.YELLOW)
+            elif Dd == min(Rd, Bd, Gd, Dd, Yd):
+                cleanedList.append(Color.BLACK)
+
+        if len(cleanedList) == 4:
+            print(cleanedList)
+            break
+
+        await wait(50)
+
+    gc.collect()
+    return cleanedList
