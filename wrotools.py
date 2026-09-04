@@ -35,7 +35,7 @@ db.use_gyro(True)
 watch: StopWatch = StopWatch()
 watch.reset()
 hub.imu.reset_heading(0)
-
+colors = []
 
 
 # HELPER FUNCTIONS
@@ -159,8 +159,8 @@ async def moveUntilColor(color: Color, speed: int, distance: int = 0, use_distan
     - A. It reaches a color with a reflection below a certain threshold
     - B. A certain distance is reached
 
-    :param reflection: The reflection threshold where the robot will stop moving
-    :type reflection: int, %
+    :param color: The color where the robot will stop moving
+    :type color: Color
     :param speed: The percentage speed that the bot will move at
     :type speed: int, %
     :param distance: The secondary distance threshold where the robot will stop
@@ -617,7 +617,7 @@ async def calibration1():
 
     db.stop()
     db.reset()
-    wait(100)
+    await wait(100)
 
 async def artifactPickup2():
 
