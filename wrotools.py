@@ -228,14 +228,12 @@ async def yellowTowers() -> None:
 
     # picking up the tower
     db.settings(1000,900,120,300)
-    await db.straight(262)
-    await db.turn(-1)
+    await db.straight(251)
     await db.turn(-90)
     db.stop()
     db.distance_control.pid(30000, 0, 9000, 5, 10)
     db.settings(660,750,150,300)
-    await db.turn(1)
-    await db.straight(202)
+    await db.straight(282)
     db.settings(150,300,120,300)
     await db.straight(120)
     db.settings(1000, 900, 150, 300)
@@ -243,7 +241,7 @@ async def yellowTowers() -> None:
 
     # placing first tower
     db.settings(1000,850,150,300)
-    await db.straight(-50)
+    await db.straight(-15)
     await db.turn(90)
     await db.straight(513)
     await moveUntilReflection(20, 45, 100) #fill distance properly
@@ -265,9 +263,9 @@ async def yellowTowers() -> None:
     await multitask(async_wrapper(db.straight, 320), moveAttachmentArms(40, -270))
     db.settings(240, 700, 120, 250)
     await db.turn(-90)
-    await db.straight(228)
+    await db.straight(223)
     await moveAttachmentArms(38,270)
-    await db.straight(-90)
+    await db.straight(-85)
     db.settings(280, 800, 160, 300)
     await moveRightArm(38, 1)
 
@@ -282,19 +280,19 @@ async def colorScanning():
     cleanedList = []
     while True:
         h, s, v = await scanHSV()
-        if 35 <= h <= 45 and Color.YELLOW not in cleanedList:
+        if 28 <= h <= 55 and Color.YELLOW not in cleanedList:
                 cleanedList.append(Color.YELLOW)
                 print(Color.YELLOW, h, s, v)
-        elif 345 <= h  and Color.RED not in cleanedList:
+        elif 343 <= h <= 365  and Color.RED not in cleanedList:
                 cleanedList.append(Color.RED)
                 print(Color.RED, h, s, v)
-        elif 155 <= h <= 165 and Color.GREEN not in cleanedList:
+        elif 151 <= h <= 164 and Color.GREEN not in cleanedList:
                 cleanedList.append(Color.GREEN)
                 print(Color.GREEN, h, s, v)
-        elif 210 <= h <= 220 and Color.BLUE not in cleanedList:
+        elif 211 <= h <= 221 and Color.BLUE not in cleanedList:
                 cleanedList.append(Color.BLUE)
                 print(Color.BLUE, h, s, v)
-        elif 225 <= h <= 255 and 5 <= s <= 20 and 0 <= v <= 20 and Color.BLACK not in cleanedList:
+        elif 172 <= h <= 188 and 8 <= s <= 18 and 14 <= v <= 28 and Color.BLACK not in cleanedList:
                 cleanedList.append(Color.BLACK)
                 print(Color.BLACK)
 
@@ -334,7 +332,6 @@ async def moveUntilHSV(hue: int, saturation: int, value: int = 0, speed: int = 3
         await multitask(waitUntilHSV(), driveForever(), race=True)
 
 async def scanning():
-    global colors
     await db.turn(-90)
     await db.straight(-70)
     await db.turn(-90)
@@ -355,7 +352,7 @@ async def calibrate():
 async def artifactPickup():
     await db.straight(320)
     await db.turn(90)
-    await db.straight(258)
+    await db.straight(248)
     await db.turn(90)
     await db.straight(190)
     await moveAttachmentArms(30, 250)
