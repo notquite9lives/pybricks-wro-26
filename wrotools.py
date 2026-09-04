@@ -228,7 +228,7 @@ async def yellowTowers() -> None:
 
     # picking up the tower
     db.settings(1000,900,120,300)
-    await db.straight(256)
+    await db.straight(262)
     await db.turn(-1)
     await db.turn(-90)
     db.stop()
@@ -362,6 +362,8 @@ async def artifactPickup():
     await db.turn(180)
 
 async def iForgot():
+    global colors
+    colors = [Color.RED, Color.BLUE, Color.GREEN, Color.BLACK]
     db.settings(480, 600, 160, 300)
     if colors[3] == Color.GREEN:
         await db.straight(300)
@@ -602,14 +604,14 @@ async def calibration1():
     elif colors[2] == Color.GREEN:
         await db.straight(-300)
         await db.turn(-90)
-        await db.straight(145)
+        await db.straight(135)
         await db.turn(90)
         await db.straight(-1000)
 
     else:
         await db.straight(-300)
-        await db.turn(-90)
-        await db.straight(15)
+        await db.turn(90)
+        await db.straight(45)
         await db.turn(90)
         await db.straight(-1000)
 
@@ -845,7 +847,7 @@ async def secondPairArtifact():
 
     if colors[1] == Color.BLUE:
         await db.turn(-90)
-        await db.straight(72)
+        await db.straight(32)
         await db.turn(90)
         await moveLeftArm(40, -270)
 
@@ -878,7 +880,6 @@ async def secondPairArtifact():
             await moveRightArm(40, -270)
             await db.straight(-100)
             await db.turn(180)
-            await db.turn(3)
             await db.straight(-255)
             await db.straight(150)
             await db.turn(180)

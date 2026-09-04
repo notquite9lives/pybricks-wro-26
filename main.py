@@ -23,7 +23,7 @@ async def main():
     print("yellow towers: ", watch.time()/1000)
     await scanning()
     print("scanning: ", watch.time()/1000)
-    await calibrate()
+    await calibrate()"""
     print("calibration: ", watch.time()/1000)
     await artifactPickup()
     print("artifact pickup: ", watch.time()/1000)
@@ -37,10 +37,11 @@ async def main():
     print("artifact pickup again: ", watch.time()/1000)
     await secondPairArtifact()
     print("second artifact dropoff: ", watch.time()/1000)
-    await calibration2()"""
+    await calibration2()
     print("calibration again: ", watch.time()/1000)
+    """
     await theRestofUs()
-    print("the rest of us: ", watch.time()/1000)
+    print("the rest of us: ", watch.time()/1000)"""
 if __name__ == "__main__":
     print(db.distance_control.pid(24000, 0, 9000, 5, 10))
     run_task(main())
