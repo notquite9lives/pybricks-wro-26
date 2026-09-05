@@ -2,7 +2,7 @@
 # version: 1.2
 # date: 15/6/2026
 
-import gc
+import gc, random
 
 import umath
 from pybricks.hubs import PrimeHub
@@ -36,6 +36,7 @@ watch: StopWatch = StopWatch()
 watch.reset()
 hub.imu.reset_heading(0)
 colors = []
+validColors = [Color.BLACK, Color.GREEN, Color.BLUE, Color.YELLOW, Color.RED]
 
 
 # HELPER FUNCTIONS
@@ -281,6 +282,7 @@ async def colorScanning():
 
     """
     cleanedList = []
+    watch.reset()
     while True:
         h, s, v = await scanHSV()
         if 28 <= h <= 55 and Color.YELLOW not in cleanedList:
@@ -302,6 +304,11 @@ async def colorScanning():
         if len(cleanedList) == 4:
             print(cleanedList)
             break
+
+        if watch.time() > 4000:
+            filtered_list = [item for item in validColors if item not in cleanedList]
+            while len(cleanedList) < 4:
+                cleanedList.append(random.choice(filtered_list))
 
         await wait(50)
 
