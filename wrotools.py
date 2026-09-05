@@ -285,21 +285,21 @@ async def colorScanning():
     watch.reset()
     while True:
         h, s, v = await scanHSV()
-        if 17 <= h <= 57 and Color.YELLOW not in cleanedList:
+        if 226 <= h <= 280 and Color.BLACK not in cleanedList:
+                cleanedList.append(Color.BLACK)
+                print(Color.BLACK)        
+        elif 17 <= h <= 57 and Color.YELLOW not in cleanedList:
                 cleanedList.append(Color.YELLOW)
                 print(Color.YELLOW, h, s, v)
         elif 300 <= h <= 400  and Color.RED not in cleanedList:
                 cleanedList.append(Color.RED)
                 print(Color.RED, h, s, v)
-        elif 151 <= h <= 164 and Color.GREEN not in cleanedList:
+        elif 130 <= h <= 180 and Color.GREEN not in cleanedList:
                 cleanedList.append(Color.GREEN)
                 print(Color.GREEN, h, s, v)
-        elif 211 <= h <= 221 and Color.BLUE not in cleanedList:
+        elif 190 <= h <= 225 and Color.BLUE not in cleanedList:
                 cleanedList.append(Color.BLUE)
                 print(Color.BLUE, h, s, v)
-        elif 172 <= h <= 188 and 8 <= s <= 18 and 14 <= v <= 28 and Color.BLACK not in cleanedList:
-                cleanedList.append(Color.BLACK)
-                print(Color.BLACK)
 
         if len(cleanedList) == 4:
             print(cleanedList)
@@ -363,7 +363,7 @@ async def calibrate():
 async def artifactPickup():
     await db.straight(320)
     await db.turn(90)
-    await db.straight(251)
+    await db.straight(248)
     await db.turn(90)
     await db.straight(200)
     await moveAttachmentArms(30, 250)
@@ -961,6 +961,7 @@ async def theRestofUs():
     await moveAttachmentArms(40, -450)
     await moveLeftArm(40, -10)
 
+    #suprise rule
     #go to people
     db.settings(1000, 1000, 200, 300)
     await db.straight(-150)
