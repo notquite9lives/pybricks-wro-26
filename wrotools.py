@@ -231,13 +231,13 @@ async def yellowTowers() -> None:
 
     # picking up the tower
     db.settings(1000,900,120,300)
-    await db.straight(249)
+    await db.straight(247)
     await db.turn(-90)
     db.stop()
     db.distance_control.pid(30000, 0, 9000, 5, 10)
     db.settings(660,750,150,300)
     #i luv peepee
-    await db.straight(182)
+    await db.straight(192)
     db.settings(150,300,120,300)
     await db.straight(120)
     db.settings(1000, 900, 150, 300)
@@ -245,7 +245,7 @@ async def yellowTowers() -> None:
 
     # placing first tower
     db.settings(1000,850,150,300)
-    await db.straight(-35)
+    await db.straight(-40)
     await db.turn(90)
     await db.straight(513)
     await moveUntilReflection(20, 45, 100) #fill distance properly
@@ -285,10 +285,10 @@ async def colorScanning():
     watch.reset()
     while True:
         h, s, v = await scanHSV()
-        if 28 <= h <= 55 and Color.YELLOW not in cleanedList:
+        if 17 <= h <= 57 and Color.YELLOW not in cleanedList:
                 cleanedList.append(Color.YELLOW)
                 print(Color.YELLOW, h, s, v)
-        elif 343 <= h <= 365  and Color.RED not in cleanedList:
+        elif 300 <= h <= 400  and Color.RED not in cleanedList:
                 cleanedList.append(Color.RED)
                 print(Color.RED, h, s, v)
         elif 151 <= h <= 164 and Color.GREEN not in cleanedList:
@@ -353,7 +353,6 @@ async def scanning():
     colors = await multitask(async_wrapper(db.straight, 690), colorScanning())
     print(colors)
     colors = colors[1]
-    colors = [Color.YELLOW, Color.RED, Color.BLUE, Color.BLACK]
 
 async def calibrate():
     await moveAttachmentArms(40,-270)
@@ -467,9 +466,9 @@ async def firstPairArtifact():
         await db.turn(3)
         await db.turn(90)
         await db.turn(3)
-        await db.straight(116)
+        await db.straight(127)
         await db.turn(-90)
-        await db.straight(174)
+        await db.straight(168)
         await moveLeftArm(40,-270)
         await db.turn(-1)
 
@@ -543,7 +542,7 @@ async def firstPairArtifact():
     elif colors[3] == Color.RED:
 
         await db.turn(-86)
-        await db.straight(153)
+        await db.straight(143)
         await db.turn(90)
         await db.straight(165)
         await moveLeftArm(40,-270)
@@ -552,7 +551,7 @@ async def firstPairArtifact():
             await db.turn(-1)
             await db.straight(-130)
             await db.turn(90)
-            await db.straight(245)
+            await db.straight(270)
             await db.turn(-90)
             await db.straight(132)
             await moveRightArm(40, -270)
@@ -585,7 +584,7 @@ async def firstPairArtifact():
             await db.straight(338)
             await db.turn(1)
             await moveRightArm(40, -270)
-
+"""
 async def calibration1():
 
     if colors[2] == Color.YELLOW:
@@ -902,7 +901,7 @@ async def secondPairArtifact():
             await db.straight(-448)
             await db.straight(150)
             await db.turn(180)
-
+"""
 async def calibration2():
     db.settings(450, 650, 120, 250)
     if colors[2] == Color.YELLOW:
@@ -939,21 +938,22 @@ async def calibration2():
         await db.straight(300)
         await db.turn(-90)
         await db.straight(-400)
+    db.reset()
 
 async def theRestofUs():
     db.settings(750, 550, 200, 300)
     await multitask(
-        async_wrapper(db.straight, 243),
-        moveAttachmentArms(10, 175)
+        async_wrapper(db.straight, 224),
+        moveAttachmentArms(10, 140)
     )
-    await db.turn(2)
+    await db.turn(1)
     await db.turn(90)
 
     await multitask(
         async_wrapper(db.straight, 300),
         moveAttachmentArms(10, 158)
     )
-    db.settings(120, 85, 300, 450)
+    db.settings(200, 100, 300, 450)
     await db.straight(5)
     await db.turn(-1)
     await db.straight(220)
@@ -965,32 +965,32 @@ async def theRestofUs():
     db.settings(1000, 1000, 200, 300)
     await db.straight(-150)
     await db.turn(180)
-    await db.straight(-300)
+    await db.straight(-450)
     db.reset()
-    await db.straight(609)
-    await db.turn(-90)
+    await db.straight(539)
+    await db.turn(90)
     await db.straight(630)
     db.settings(120, 300, 120, 150)
-    await db.straight(5)
+    await db.straight(15)
     await moveAttachmentArms(40, 165)
     #put bandar in place
-    db.settings(100, 100, 1000, 1000)
+    db.settings(100, 100, 300, 300)
     await db.turn(-15)
     await db.turn(30)
     await db.turn(-15)
     #go to debris waala jaga
-    db.settings(1000, 1000, 200, 150)
+    db.settings(600, 600, 200, 150)
     await db.straight(-240)
     await db.turn(90)
     await db.straight(-1560)
     #drop black
     await db.turn(-90)
     await db.straight(-375)
-    await db.straight(160)
+    await db.straight(165)
     await db.turn(220)
     await moveRightArm(40, -300)
     #drop blue
-    await db.straight(-150)
+    await db.straight(-155)
     await db.turn(-80)
     await db.straight(-420)
     await db.turn(40)
@@ -1035,12 +1035,12 @@ async def colorScanning2():
     while True:
         h, s, v = await scanHSV()
         d = await dist((h, s, v))
-        Rd = min(umath.fabs(d - await dist(Rc)), umath.fabs(d - await dist(Rf)))
-        Bd = min(umath.fabs(d - await dist(Bc)), umath.fabs(d - await dist(Bf)))
-        Gd = min(umath.fabs(d - await dist(Gc)), umath.fabs(d - await dist(Gf)))
-        Dd = min(umath.fabs(d - await dist(Dc)), umath.fabs(d - await dist(Df)))
-        Yd = min(umath.fabs(d - await dist(Yc)), umath.fabs(d - await dist(Yf)))
-        if min(Rd, Bd, Gd, Dd, Yd) < 25:
+        Rd = min(umath.fabs(d - await dist(Rc)), umath.fabs(d - await dist(Rf))) if Color.RED not in cleanedList else 10000
+        Bd = min(umath.fabs(d - await dist(Bc)), umath.fabs(d - await dist(Bf))) if Color.BLUE not in cleanedList else 10000
+        Gd = min(umath.fabs(d - await dist(Gc)), umath.fabs(d - await dist(Gf))) if Color.GREEN not in cleanedList else 10000
+        Dd = min(umath.fabs(d - await dist(Dc)), umath.fabs(d - await dist(Df))) if Color.BLACK not in cleanedList else 10000
+        Yd = min(umath.fabs(d - await dist(Yc)), umath.fabs(d - await dist(Yf))) if Color.YELLOW not in cleanedList else 10000
+        if min(Rd, Bd, Gd, Dd, Yd) < 15:
             if Rd == min(Rd, Bd, Gd, Dd, Yd):
                 cleanedList.append(Color.RED)
             elif Bd == min(Rd, Bd, Gd, Dd, Yd):
