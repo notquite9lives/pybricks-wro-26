@@ -633,7 +633,7 @@ async def theRestofUs():
     await db.turn(90)
 
     await multitask(
-        async_wrapper(db.straight, 300),
+        async_wrapper(db.straight, 250),
         moveAttachmentArms(10, 158)
     )
     db.settings(200, 100, 300, 450)
@@ -647,29 +647,26 @@ async def theRestofUs():
     #suprise rule
     #go to people
     db.settings(1000, 1000, 200, 300)
-    await db.straight(-150)
+    await db.straight(-100)
     await db.turn(180)
     await db.straight(-450)
     db.reset()
     await db.straight(450)
     await db.turn(90)
-    await db.straight(505)
+    await db.straight(545)
     await db.turn(90)
+    db.settings(200, 200, 75, 80)
     await db.straight(300)
     await moveLeftArm(40, 250)
     await db.straight(-600)
     await db.turn(180)
     await moveLeftArm(40, -450)
-    await db.straight(-227)
+    await db.straight(-211)
     await db.turn(90)
     await db.straight(200)
 
     #jhj
-    await db.straight(539)
-    await db.turn(90)
-    await db.straight(630)
     db.settings(120, 300, 120, 150)
-    await db.straight(15)
     await moveAttachmentArms(40, 165)
     #put bandar in place
     db.settings(100, 100, 300, 300)
@@ -681,6 +678,10 @@ async def theRestofUs():
     await db.straight(-240)
     await db.turn(90)
     await db.straight(-1560)
+    await db.turn(60)
+    await db.straight(-260)
+    await db.straight(260)
+    await db.turn(-60)
     #drop black
     await db.turn(-90)
     await db.straight(-375)
@@ -689,11 +690,11 @@ async def theRestofUs():
     await moveRightArm(40, -300)
     #drop blue
     await db.straight(-155)
-    await db.turn(-80)
+    await db.turn(-50)
     await db.straight(-420)
-    await db.turn(40)
     await db.straight(280)
     await db.turn(130)
+    await db.straight(50)
     await moveAttachmentArms(40, -270)
     #drop tower #2
     await db.straight(-80)
@@ -706,6 +707,7 @@ async def theRestofUs():
     await db.turn(90)
     await db.straight(100)
     await moveRightArm(40, 360)
+    await db.straight()
 
 async def dist(n):
     return umath.sqrt(n[0]**2 + n[1]**2 + n[2]**2)

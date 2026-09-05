@@ -1,6 +1,6 @@
 from pybricks.parameters import Color
 
-from wrotools import db, yellowTowers, watch, resetDB, hub,\
+from wrotools import db, yellowTowers, watch, resetDB, hub,moveAttachmentArms, \
     scanning,artifactPickup, iForgot, firstPairArtifact, \
      calibration2, theRestofUs, calibrate, scanHSV
 from pybricks.tools import run_task
@@ -18,18 +18,22 @@ async def main():
     await resetDB()
     # yellow towers + time
     await yellowTowers()
+    await db.straight(-760)
+    await db.turn(90)
+    await db.straight(-1000)
+    await moveAttachmentArms(40,-300)
     #print("yellow towers: ", watch.time()/1000)
-    await scanning()
+    #await scanning()
     #print("scanning: ", watch.time()/1000)
-    await calibrate()
+    #await calibrate()
     #print("calibration: ", watch.time()/1000)
-    await artifactPickup()
+    #await artifactPickup()
     #print("artifact pickup: ", watch.time()/1000)
-    await iForgot()
+    #await iForgot()
     #print("iforgot: ", watch.time()/1000)
-    await firstPairArtifact()
+    #await firstPairArtifact()
     #print("first artifact dropoff: ", watch.time()/1000)
-    await calibration2()
+    #await calibration2()
     #print("calibration again: ", watch.time()/1000)
     await theRestofUs()
     #print("the rest of us: ", watch.time()/1000)
